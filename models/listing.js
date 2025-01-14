@@ -1,4 +1,4 @@
-const {Schema,model, set} = require("mongoose")
+const { Schema, model, set } = require("mongoose");
 
 const listingSchema = new Schema({
   title: {
@@ -8,22 +8,31 @@ const listingSchema = new Schema({
   description: {
     type: String,
   },
+  // image: {
+  //   type: {
+  //     filename: { type: String, default: "default-image-name" }, // Optional default
+  //     url: {
+  //       type: String,
+  //       default:
+  //         "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //       set: (v) =>
+  //         v ||
+  //         "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     },
+  //   },
+  //   default: {
+  //     filename: "default-image-name",
+  //     url: "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  // },
   image: {
-    type: {
-      filename: { type: String, default: "default-image-name" }, // Optional default
-      url: {
-        type: String,
-        default:
-          "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        set: (v) =>
-          v ||
-          "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      },
-    },
-    default: {
-      filename: "default-image-name",
-      url: "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
+    type: String,
+    default:
+      "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    set: (v) =>
+      v === ""
+        ? "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        : v,
   },
   price: {
     type: Number,
@@ -37,7 +46,6 @@ const listingSchema = new Schema({
   },
 });
 
+const Listing = model("Listing", listingSchema);
 
-const Listing = model("Listing",listingSchema)
-
-module.exports = Listing
+module.exports = Listing;
