@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Listing = require("./models/listing");
 const methodoverride = require("method-override");
+const ejsMate = require("ejs-mate")
 const path = require("path");
 const app = express();
 const PORT = 3000;
@@ -10,19 +11,13 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodoverride("_method"));
+app.use(express.static(path.join(__dirname,"/public")))
+app.engine("ejs",ejsMate)
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/wandernest")
   .then(() => console.log("MongoDb is connected"))
   .catch((e) => console.log("Error in Mongodb", e));
-
-const firstListing = new Listing({
-  title: "first",
-  description: "hello, this is first listing",
-  price: 2000,
-  location: "gec bhavnagar",
-  country: "india",
-});
 
 app.get("/", (req, res) => {
   res.send("Hello, This is root");
