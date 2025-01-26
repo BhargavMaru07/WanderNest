@@ -2,10 +2,10 @@
 <body>
   <div class="row">
     <div class="col-8 offset-2">
-      <h1 class="mt-3 mb-3">Create New Listing</h1>
+      <h1 class="mt-3 mb-3 new-listings-heading">Create New Listing</h1>
       <form action="/listings" method="post">
         <!-- we give name as a object key to all input so we gate object in req.body  -->
-        <div class="mb-3">
+        <div class="mb-3 title">
           <label for="title" class="form-label">Title</label>
           <input
             type="text"
@@ -14,7 +14,7 @@
             class="form-control"
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 description">
           <label for="description" class="form-label">Description</label>
           <textarea
             type="text"
@@ -23,7 +23,7 @@
             class="form-control"
           ></textarea>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 image">
           <label for="image" class="form-label">Image-URL</label>
           <input
             type="text"
@@ -32,7 +32,7 @@
             class="form-control"
           />
         </div>
-        <div class="row">
+        <div class="row price-country">
           <div class="mb-3 col-md-4">
             <label for="price" class="form-label">price</label>
             <input
@@ -52,7 +52,7 @@
             />
           </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 location">
           <label for="location" class="form-label">Location</label>
           <input
             type="text"
@@ -61,7 +61,7 @@
             class="form-control"
           />
         </div>
-        <button class="btn btn-dark add-btn mt-3 mb-3">Add</button>
+        <button class="btn btn-dark add-btn mt-3 mb-3 ">Add</button>
       </form>
     </div>
   </div>

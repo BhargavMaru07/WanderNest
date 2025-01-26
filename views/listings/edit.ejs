@@ -2,12 +2,12 @@
 <body>
   <div class="row">
     <div class="col-8 offset-2">
-      <h1 class="mb-3 mt-3">Edit your listing</h1>
+      <h1 class="mb-3 mt-3 edit-listings-heading">Edit your listing</h1>
       <form
         method="post"
         action="/listings/update/<%= listing._id %>?_method=PUT"
       >
-        <div class="mb-3">
+        <div class="mb-3 title">
           <label for="title" class="form-label">Title</label>
           <input
             type="text"
@@ -17,7 +17,7 @@
             class="form-control"
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 description">
           <label for="description" class="form-label">Description</label>
           <textarea
             type="text"
@@ -28,7 +28,7 @@
 <%= listing.description %></textarea
           >
         </div>
-        <div class="mb-3">
+        <div class="mb-3 image">
           <label for="image" class="form-label">Image-URL</label>
           <input
             type="text"
@@ -38,7 +38,7 @@
             class="form-control"
           />
         </div>
-        <div class="row">
+        <div class="row price-country">
           <div class="col-md-4 mb-3">
             <label for="price" class="form-label">Price</label>
             <input
@@ -60,7 +60,7 @@
             />
           </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 location">
           <label for="location" class="form-label">Location</label>
           <input
             type="text"
