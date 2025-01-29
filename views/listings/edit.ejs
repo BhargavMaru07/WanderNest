@@ -6,6 +6,8 @@
       <form
         method="post"
         action="/listings/update/<%= listing._id %>?_method=PUT"
+        novalidate
+        class="needs-validation"
       >
         <div class="mb-3 title">
           <label for="title" class="form-label">Title</label>
@@ -15,7 +17,10 @@
             placeholder="Enter Title"
             name="listing[title]"
             class="form-control"
+            required
           />
+          <div class="valid-feedback">Title Looks good!</div>
+          <div class="invalid-feedback">Title is required!</div>
         </div>
         <div class="mb-3 description">
           <label for="description" class="form-label">Description</label>
@@ -24,9 +29,12 @@
             placeholder="Enter description"
             name="listing[description]"
             class="form-control"
+            required
           >
 <%= listing.description %></textarea
           >
+           <div class="valid-feedback">Description Looks good!</div>
+          <div class="invalid-feedback">Description is required!</div>
         </div>
         <div class="mb-3 image">
           <label for="image" class="form-label">Image-URL</label>
@@ -37,6 +45,8 @@
             name="listing[image]"
             class="form-control"
           />
+           <div class="valid-feedback">Image Looks good!</div>
+          <div class="invalid-feedback">Image is required!</div>
         </div>
         <div class="row price-country">
           <div class="col-md-4 mb-3">
@@ -47,7 +57,10 @@
               placeholder="Enter price"
               name="listing[price]"
               class="form-control"
+              required
             />
+              <div class="valid-feedback">Price Looks good!</div>
+            <div class="invalid-feedback">Price is required!</div>
           </div>
           <div class="col-md-8 mb-3">
             <label for="country" class="form-label">Country</label>
@@ -57,7 +70,10 @@
               placeholder="Enter country"
               name="listing[country]"
               class="form-control"
+              required
             />
+             <div class="valid-feedback">Country Looks good!</div>
+            <div class="invalid-feedback">Country is required!</div>
           </div>
         </div>
         <div class="mb-3 location">
@@ -68,7 +84,10 @@
             placeholder="Enter location"
             name="listing[location]"
             class="form-control"
+            required
           />
+            <div class="valid-feedback">Location Looks good!</div>
+          <div class="invalid-feedback">Location is required!</div>
         </div>
         <button class="btn btn-dark edit-btn mt-3 mb-3">Edit</button>
       </form>
