@@ -1,4 +1,4 @@
-const { Schema, model, set } = require("mongoose");
+const { Schema, model, set, default: mongoose } = require("mongoose");
 
 const listingSchema = new Schema({
   title: {
@@ -47,6 +47,12 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
+  reviews:[
+    {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Review"
+    }
+  ]
 });
 
 const Listing = model("Listing", listingSchema);
