@@ -6,7 +6,8 @@ const ejsMate = require("ejs-mate");
 const path = require("path");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const listingSchema = require("./schema");
+const {listingSchema,reviewSchema} = require("./schema");
+const Review = require("./models/review");
 const app = express();
 const PORT = 3000;
 
@@ -46,6 +47,17 @@ const validateListing = (req, res, next) => {
   }
 };
 
+const validateReview = (req,res,next)=>{
+  let {error} = reviewSchema.validate(req.body);
+
+  if (error) {
+    let errMsg = error.details.map((e) => e.message).join(",");
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+}
+
 //new route
 //always keep this route above the show route/("/listings/:id") bcs if write below show route then it is conserder "new" as a path parameter so it's not wroking
 app.get("/listings/new", (req, res) => {
@@ -57,7 +69,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let individualListings = await Listing.findById(id);
+    let individualListings = await Listing.findById(id).populate("reviews");
     res.render("listings/show", { individualListings });
   })
 );
@@ -76,6 +88,31 @@ app.post(
     res.redirect("/listings");
   })
 );
+
+//review POST route
+app.post(
+  "/listings/:id/review",
+  validateReview,
+  wrapAsync(async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = await Review(req.body.review);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+    console.log(listing);
+    res.redirect(`/listings/${listing._id}`);
+  })
+);
+
+//DELETE REVIEW:
+app.delete("/listings/:id/review/:reviewId",wrapAsync(async (req,res)=>{
+  let {id,reviewId} = req.params;
+
+  await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}})
+  await Review.findByIdAndDelete(reviewId)
+
+  res.redirect(`/listings/${id}`)
+}));
 
 //Edit route
 app.get(

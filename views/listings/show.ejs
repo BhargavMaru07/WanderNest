@@ -39,9 +39,14 @@
         </form>
       </div>
       <hr />
-      <div class="mb-3 mt-3"> 
+      <div class="mb-3 mt-3">
         <h2 class="mb-3">Leave a Review</h2>
-        <form action="">
+        <form
+          action="/listings/<%= individualListings._id %>/review"
+          method="post"
+          novalidate
+          class="needs-validation"
+        >
           <div class="mb-3">
             <label for="rating">Rating</label>
             <input
@@ -51,7 +56,10 @@
               id="rating"
               name="review[rating]"
               class="form-range"
+              required
             />
+            <div class="valid-feedback">Rating Looks good!</div>
+            <div class="invalid-feedback">Rating is required!</div>
           </div>
           <div class="mb-3">
             <label for="comment">Comment</label>
@@ -62,11 +70,37 @@
               rows="5"
               placeholder="Enter Comment"
               class="form-control"
+              required
             ></textarea>
+            <div class="valid-feedback">Comment Looks good!</div>
+            <div class="invalid-feedback">Comment is required!</div>
           </div>
-          <button class="btn btn-outline-dark mb-3">Submit</button>
+          <button class="btn btn-outline-dark mb-3" type="submit">
+            Submit
+          </button>
         </form>
       </div>
+      <hr />
+     <div class="container mt-4">
+  <h2 class="text-center mb-4">All Reviews</h2>
+  <div class="row">
+    <% for (const [index, review] of individualListings.reviews.entries()) { %>
+      <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card p-3 shadow-lg border-0 rounded-4" style="background-color: #e3f2fd;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Review <%= index + 1 %></h5>
+            <p class="card-text"><strong>Comment:</strong> <%= review.comment %></p>
+            <p class="card-text"><strong>Rating:</strong> ⭐ <%= review.rating %> / 5</p>
+            <form action="/listings/<%= individualListings._id %>/review/<%= review._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger rounded-pill px-3">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
     </div>
   </div>
 </body>
