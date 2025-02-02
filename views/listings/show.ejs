@@ -80,27 +80,44 @@
           </button>
         </form>
       </div>
+      <% if(individualListings.reviews.length > 0){ %>
       <hr />
-     <div class="container mt-4">
-  <h2 class="text-center mb-4">All Reviews</h2>
-  <div class="row">
-    <% for (const [index, review] of individualListings.reviews.entries()) { %>
-      <div class="col-lg-6 col-md-6 col-12 mb-4">
-        <div class="card p-3 shadow-lg border-0 rounded-4" style="background-color: #e3f2fd;">
-          <div class="card-body">
-            <h5 class="card-title fw-bold">Review <%= index + 1 %></h5>
-            <p class="card-text"><strong>Comment:</strong> <%= review.comment %></p>
-            <p class="card-text"><strong>Rating:</strong> ⭐ <%= review.rating %> / 5</p>
-            <form action="/listings/<%= individualListings._id %>/review/<%= review._id %>?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-danger rounded-pill px-3">Delete</button>
-            </form>
+      <div class="container mt-4">
+        <h2 class="text-center mb-4">All Reviews</h2>
+        <div class="row">
+          <% for (const [index, review] of individualListings.reviews.entries())
+          { %>
+          <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div
+              class="card p-3 shadow-lg border-0 rounded-4"
+              style="background-color: #e3f2fd"
+            >
+              <div class="card-body">
+                <h5 class="card-title fw-bold">Review <%= index + 1 %></h5>
+                <p class="card-text">
+                  <strong>Comment:</strong> <%= review.comment %>
+                </p>
+                <p class="card-text">
+                  <strong>Rating:</strong> ⭐ <%= review.rating %> / 5
+                </p>
+                <form
+                  action="/listings/<%= individualListings._id %>/review/<%= review._id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-danger rounded-pill px-3"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
+          <% } %>
         </div>
       </div>
-    <% } %>
-  </div>
-</div>
-
+      <% } %>
     </div>
   </div>
 </body>

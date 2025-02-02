@@ -48,21 +48,21 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-  reviews:[
+  reviews: [
     {
-      type:mongoose.Schema.Types.ObjectId,
-      ref:"Review"
-    }
-  ]
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
-//mongoose middleware
+//mongoose middleware ....write it before model creation
 
-listingSchema.post("findOneAndDelete",async(listing)=>{
-    if(listing.reviews.length){
-      await Review.deleteMany({_id:{$in:listing.reviews}})
-    }
-})
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing.reviews.length) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
+  }
+});
 
 const Listing = model("Listing", listingSchema);
 
