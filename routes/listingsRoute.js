@@ -4,6 +4,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
 const Listing = require("../models/listing");
+const { isLoggedIn } = require("../middleware");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
@@ -26,7 +27,7 @@ router.get(
 
 //new route
 //always keep this route above the show route/("/listings/:id") bcs if write below show route then it is conserder "new" as a path parameter so it's not wroking
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new");
 });
 
@@ -48,6 +49,7 @@ router.get(
 // "req.body.listing" using this we directly get the object of all detail and we put in Listing()
 router.post(
   "/",
+  isLoggedIn,
   validateListing,
   wrapAsync(async (req, res) => {
     // let result = listingSchema.validate(req.body);  for joi validation...
@@ -63,13 +65,14 @@ router.post(
 //Edit route
 router.get(
   "/edit/:id",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
-      if (!listing) {
-        req.flash("error", "Listing you request for does not exists");
-        res.redirect("/listings")
-      }
+    if (!listing) {
+      req.flash("error", "Listing you request for does not exists");
+      res.redirect("/listings");
+    }
     res.render("listings/edit", { listing });
   })
 );
@@ -77,6 +80,7 @@ router.get(
 //update route
 router.put(
   "/update/:id",
+  isLoggedIn,
   validateListing,
   wrapAsync(async (req, res) => {
     if (!req.body.listing) {
@@ -92,6 +96,7 @@ router.put(
 //Delete route
 router.delete(
   "/:id",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
