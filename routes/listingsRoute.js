@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
 const Listing = require("../models/listing");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isOwner } = require("../middleware");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
@@ -36,11 +36,19 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let individualListings = await Listing.findById(id).populate("reviews");
-    if (!individualListings){
-          req.flash("error", "Listing you request for does not exists");
-          res.redirect("/listings")
-    } 
+    let individualListings = await Listing.findById(id)
+      .populate({               // nested populate
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      })
+      .populate("owner");
+    console.log(individualListings);
+    if (!individualListings) {
+      req.flash("error", "Listing you request for does not exists");
+      res.redirect("/listings");
+    }
     res.render("listings/show", { individualListings });
   })
 );
@@ -56,8 +64,10 @@ router.post(
     // console.log(result);
     console.log(req.body);
     let newListing = new Listing(req.body.listing);
+    //adding owner id from req object bcs passport store user in req object.
+    newListing.owner = req.user._id;
     await newListing.save();
-    req.flash("success","New Listing Created!!")
+    req.flash("success", "New Listing Created!!");
     res.redirect("/listings");
   })
 );
@@ -66,6 +76,7 @@ router.post(
 router.get(
   "/edit/:id",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
@@ -81,6 +92,7 @@ router.get(
 router.put(
   "/update/:id",
   isLoggedIn,
+  isOwner,
   validateListing,
   wrapAsync(async (req, res) => {
     if (!req.body.listing) {
@@ -97,6 +109,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);

@@ -1,3 +1,6 @@
+const Listing = require("./models/listing");
+const Review = require("./models/review");
+
 const isLoggedIn = (req, res, next) => {
    //req.isAuthenticated() this is passport method . passport store user related info in req object. 
 
@@ -23,7 +26,30 @@ const isLoggedIn = (req, res, next) => {
     next()
  }
 
- module.exports = {
-    isLoggedIn,
-    saveRedirectUrl
+
+ const isOwner = async(req,res,next)=>{
+   const {id} = req.params;
+   const listing = await Listing.findById(id);
+   if(!listing.owner._id.equals(res.locals.currUser._id)){
+      req.flash("error","You are not Authorized");
+      return res.redirect(`/listings/${id}`)
+   }
+   next()
  }
+
+ const isReviewAuthor = async(req,res,next)=>{
+   const { id, reviewId } = req.params;
+   const review = await Review.findById(reviewId);
+   if(!review.author.equals(res.locals.currUser._id)){
+      req.flash("error","You are not Author of this review");
+      return res.redirect(`/listings/${id}`)
+   }
+   next();
+ }
+
+ module.exports = {
+   isLoggedIn,
+   saveRedirectUrl,
+   isOwner,
+   isReviewAuthor,
+ };

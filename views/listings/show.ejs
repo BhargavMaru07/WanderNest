@@ -16,6 +16,12 @@
         <div class="card-body">
           <p class="card-text show-card-text">
             <b><%= individualListings.title %></b><br /><br />
+            <b>Owner : </b>
+            <i
+              ><%= individualListings.owner ? individualListings.owner.username
+              : "Unknown" %></i
+            ><br /><br />
+
             <b>Price :</b> <%= individualListings.price.toLocaleString("en-IN")
             %>/ night<br /><br />
             <b>Description :</b> <%= individualListings.description %><br /><br />
@@ -24,6 +30,7 @@
           </p>
         </div>
       </div>
+      <% if(currUser && currUser._id.equals(individualListings.owner._id)){ %>
       <div class="row show-btn">
         <a
           href="/listings/edit/<%= individualListings._id %>"
@@ -39,6 +46,8 @@
         </form>
       </div>
       <hr />
+      <% } %>
+      <% if(currUser){ %>
       <div class="mb-3 mt-3">
         <h2 class="mb-3">Leave a Review</h2>
         <form
@@ -80,8 +89,9 @@
           </button>
         </form>
       </div>
-      <% if(individualListings.reviews.length > 0){ %>
+      <% } %> 
       <hr />
+      <% if(individualListings.reviews.length > 0){ %>
       <div class="container mt-4">
         <h2 class="text-center mb-4">All Reviews</h2>
         <div class="row">
@@ -93,13 +103,15 @@
               style="background-color: #e3f2fd"
             >
               <div class="card-body">
-                <h5 class="card-title fw-bold">Review <%= index + 1 %></h5>
+                <h5 class="card-title fw-bold">@ <%=review.author.username %></h5>
                 <p class="card-text">
                   <strong>Comment:</strong> <%= review.comment %>
                 </p>
                 <p class="card-text">
                   <strong>Rating:</strong> ⭐ <%= review.rating %> / 5
                 </p>
+                <% if(currUser &&
+                currUser._id.equals(review.author._id)){ %>
                 <form
                   action="/listings/<%= individualListings._id %>/review/<%= review._id %>?_method=DELETE"
                   method="POST"
@@ -111,6 +123,7 @@
                     Delete
                   </button>
                 </form>
+                <% } %>
               </div>
             </div>
           </div>

@@ -54,6 +54,10 @@ const listingSchema = new Schema({
       ref: "Review",
     },
   ],
+  owner:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+  }
 });
 
 //mongoose middleware ....write it before model creation

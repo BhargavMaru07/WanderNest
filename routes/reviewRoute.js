@@ -4,6 +4,7 @@ const Listing = require("../models/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const {reviewSchema } = require("../schema");
+const { isLoggedIn, isReviewAuthor } = require("../middleware");
 //we need to add this option {mergeParams:true} . ama perent route ma je "id" ave te review ni andar pan avse . jo aa option no hoi to to "id" undefine avse and error throw thase..
 //parent route means index.js ma apde reviewRoute ne call karva mate je pela path apyo che te "/listings/:id/review"
 //and child route measn aa file ma je path che te "/" for POST and "/:reviewId" FOR DELETE..
@@ -24,10 +25,12 @@ const validateReview = (req, res, next) => {
 //review POST route
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = await Review(req.body.review);
+    newReview.author = req.user._id;
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
@@ -40,9 +43,10 @@ router.post(
 //DELETE REVIEW:
 router.delete(
   "/:reviewId",
+  isLoggedIn,
+  isReviewAuthor,
   wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
-
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
     req.flash("success", "Review Delete!!");

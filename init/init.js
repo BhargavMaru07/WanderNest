@@ -9,7 +9,8 @@ mongoose
 
   const init = async()=>{
    await Listing.deleteMany({});
-   const allData = await Listing.insertMany(data)
+   let data2 = data.map((obj)=>({...obj,owner:"67a42f27a43e3d313d101428"}))
+   const allData = await Listing.insertMany(data2);
    console.log(allData);
   }
 
