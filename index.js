@@ -9,6 +9,10 @@ const flash = require("connect-flash")
 const ExpressError = require("./utils/ExpressError");
 const listingsRoute = require("./routes/listingsRoute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
+const userRoute = require("./routes/userRoute.js");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 const app = express();
 const PORT = 3000;
 
@@ -26,6 +30,15 @@ app.use(
 );
 app.use(flash());
 
+//PASSPORT...
+app.use(passport.initialize());
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+//middleware for connect-flash
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -44,10 +57,13 @@ mongoose
   .then(() => console.log("MongoDb is connected"))
   .catch((e) => console.log("Error in Mongodb", e));
 
+
 //For listings routes
 app.use("/listings", listingsRoute);
 // For Review routes
 app.use("/listings/:id/review", reviewRoute);
+//For User routes
+app.use("/",userRoute)
 
 //Root route
 app.get("/", (req, res) => {
