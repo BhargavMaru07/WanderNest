@@ -28,6 +28,8 @@ module.exports.showIndividualListing = async (req, res) => {
   res.render("listings/show", { individualListings });
 };
 
+//post route for new listings
+// "req.body.listing" using this we directly get the object of all detail and we put in Listing()
 module.exports.newListing = async (req, res) => {
   // let result = listingSchema.validate(req.body);  for joi validation...
   // console.log(result);

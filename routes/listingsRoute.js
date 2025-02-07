@@ -4,30 +4,31 @@ const wrapAsync = require("../utils/wrapAsync");
 const { isLoggedIn, isOwner,validateListing } = require("../middleware");
 const listingController = require("../controller/listingController.js")
 
+//GET ALL LISTING
+//POST LISTING
+router
+  .route("/")
+  .get(wrapAsync(listingController.allListings))
+  .post(
+    isLoggedIn,
+    validateListing,
+    wrapAsync(listingController.newListing)
+  );
 
-router.get(
-  "/",
-  wrapAsync(listingController.allListings)
-);
-
-//new route
+//RENDER NEW LISTING FORM
 //always keep this route above the show route/("/listings/:id") bcs if write below show route then it is conserder "new" as a path parameter so it's not wroking
 router.get("/new", isLoggedIn, listingController.renderNewListingForm);
 
 //show route
-router.get(
-  "/:id",
-  wrapAsync(listingController.showIndividualListing)
-);
-
-//post route for new listings
-// "req.body.listing" using this we directly get the object of all detail and we put in Listing()
-router.post(
-  "/",
-  isLoggedIn,
-  validateListing,
-  wrapAsync(listingController.newListing)
-);
+//Delete route
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.showIndividualListing))
+  .delete(
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.deleteListing)
+  );
 
 //Edit route
 router.get(
@@ -44,14 +45,6 @@ router.put(
   isOwner,
   validateListing,
   wrapAsync(listingController.updateListing)
-);
-
-//Delete route
-router.delete(
-  "/:id",
-  isLoggedIn,
-  isOwner,
-  wrapAsync(listingController.deleteListing)
 );
 
 module.exports = router;
