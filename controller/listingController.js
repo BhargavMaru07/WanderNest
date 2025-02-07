@@ -20,7 +20,6 @@ module.exports.showIndividualListing = async (req, res) => {
       },
     })
     .populate("owner");
-  console.log(individualListings);
   if (!individualListings) {
     req.flash("error", "Listing you request for does not exists");
     res.redirect("/listings");
@@ -33,10 +32,25 @@ module.exports.showIndividualListing = async (req, res) => {
 module.exports.newListing = async (req, res) => {
   // let result = listingSchema.validate(req.body);  for joi validation...
   // console.log(result);
-  console.log(req.body);
+  // console.log("new listing body",req.body);
+  
   let newListing = new Listing(req.body.listing);
+
   //adding owner id from req object bcs passport store user in req object.
   newListing.owner = req.user._id;
+
+  //adding url and filename in image field..
+  // console.log(req.file)
+  if (req.file) {
+    newListing.image = { url:req.file.path, filename:req.file.filename};
+  } else {
+    // Use default image if no file was uploaded
+    newListing.image = {
+      url: "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      filename: "default-image",
+    };
+  }
+  
   await newListing.save();
   req.flash("success", "New Listing Created!!");
   res.redirect("/listings");

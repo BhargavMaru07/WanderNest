@@ -12,7 +12,6 @@ const listingSchema = new Schema({
   },
   // image: {
   //   type: {
-  //     filename: { type: String, default: "default-image-name" }, // Optional default
   //     url: {
   //       type: String,
   //       default:
@@ -21,21 +20,24 @@ const listingSchema = new Schema({
   //         v ||
   //         "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   //     },
+  //     filename: { type: String, default: "default-image-name" }, // Optional default
   //   },
   //   default: {
-  //     filename: "default-image-name",
   //     url: "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     filename: "default-image",
   //   },
   // },
   image: {
-    type: String,
-    default:
-      "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    set: (v) =>
-      v === ""
-        ? "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        : v,
+    type: {
+      url: { type: String, required: true },
+      filename: { type: String, default: "default-image-name" },
+    },
+    default: {
+      url: "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      filename: "default-image",
+    },
   },
+
   price: {
     type: Number,
     required: true,
@@ -54,10 +56,10 @@ const listingSchema = new Schema({
       ref: "Review",
     },
   ],
-  owner:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"User"
-  }
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 //mongoose middleware ....write it before model creation
@@ -71,3 +73,12 @@ listingSchema.post("findOneAndDelete", async (listing) => {
 const Listing = model("Listing", listingSchema);
 
 module.exports = Listing;
+
+
+// type: String,
+//     default:
+//       "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//     set: (v) =>
+//       v === ""
+//         ? "https://images.unsplash.com/photo-1735597693189-9ba81b5bbc83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+//         : v,
