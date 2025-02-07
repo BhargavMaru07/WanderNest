@@ -63,7 +63,12 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "Listing you request for does not exists");
     res.redirect("/listings");
   }
-  res.render("listings/edit", { listing });
+
+  // for image preview in edit form .... cloudinary feature in which we just change url after /upload add some fields for size,low pixels,blue,etc..in this we set width ...
+  //this portion only work for cloudinary upload picture not for unsplash picture...
+  let originalImageUrl = listing.image.url;
+  originalImageUrl = originalImageUrl.replace("/upload","/upload/w_250")
+  res.render("listings/edit", { listing,originalImageUrl });
 };
 
 module.exports.updateListing = async (req, res) => {
@@ -71,7 +76,13 @@ module.exports.updateListing = async (req, res) => {
     throw new ExpressError(404, "Send valid data for listing");
   }
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+
+  //if image updated in edit file then only this code will run 
+  if(typeof req.file !== "undefined"){
+    listing.image = { url: req.file.path, filename: req.file.filename };
+    await listing.save();
+  }
   req.flash("success", "Listing Updated!!");
   res.redirect(`/listings/${id}`);
 };
