@@ -1,56 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
-const { listingSchema } = require("../schema");
-const Listing = require("../models/listing");
-const { isLoggedIn, isOwner } = require("../middleware");
+const { isLoggedIn, isOwner,validateListing } = require("../middleware");
+const listingController = require("../controller/listingController.js")
 
-const validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-
-  if (error) {
-    let errMsg = error.details.map((e) => e.message).join(",");
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-};
 
 router.get(
   "/",
-  wrapAsync(async (req, res) => {
-    let allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
-  })
+  wrapAsync(listingController.allListings)
 );
 
 //new route
 //always keep this route above the show route/("/listings/:id") bcs if write below show route then it is conserder "new" as a path parameter so it's not wroking
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("listings/new");
-});
+router.get("/new", isLoggedIn, listingController.renderNewListingForm);
 
 //show route
 router.get(
   "/:id",
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let individualListings = await Listing.findById(id)
-      .populate({               // nested populate
-        path: "reviews",
-        populate: {
-          path: "author",
-        },
-      })
-      .populate("owner");
-    console.log(individualListings);
-    if (!individualListings) {
-      req.flash("error", "Listing you request for does not exists");
-      res.redirect("/listings");
-    }
-    res.render("listings/show", { individualListings });
-  })
+  wrapAsync(listingController.showIndividualListing)
 );
 
 //post route for new listings
@@ -59,17 +26,7 @@ router.post(
   "/",
   isLoggedIn,
   validateListing,
-  wrapAsync(async (req, res) => {
-    // let result = listingSchema.validate(req.body);  for joi validation...
-    // console.log(result);
-    console.log(req.body);
-    let newListing = new Listing(req.body.listing);
-    //adding owner id from req object bcs passport store user in req object.
-    newListing.owner = req.user._id;
-    await newListing.save();
-    req.flash("success", "New Listing Created!!");
-    res.redirect("/listings");
-  })
+  wrapAsync(listingController.newListing)
 );
 
 //Edit route
@@ -77,15 +34,7 @@ router.get(
   "/edit/:id",
   isLoggedIn,
   isOwner,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let listing = await Listing.findById(id);
-    if (!listing) {
-      req.flash("error", "Listing you request for does not exists");
-      res.redirect("/listings");
-    }
-    res.render("listings/edit", { listing });
-  })
+  wrapAsync(listingController.renderEditForm)
 );
 
 //update route
@@ -94,15 +43,7 @@ router.put(
   isLoggedIn,
   isOwner,
   validateListing,
-  wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-      throw new ExpressError(404, "Send valid data for listing");
-    }
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    req.flash("success", "Listing Updated!!");
-    res.redirect(`/listings/${id}`);
-  })
+  wrapAsync(listingController.updateListing)
 );
 
 //Delete route
@@ -110,13 +51,7 @@ router.delete(
   "/:id",
   isLoggedIn,
   isOwner,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(deletedListing);
-    req.flash("success", "Listing Deleted!!");
-    res.redirect("/listings");
-  })
+  wrapAsync(listingController.deleteListing)
 );
 
 module.exports = router;
