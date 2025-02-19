@@ -1,5 +1,6 @@
 const { Schema, model, set, default: mongoose } = require("mongoose");
 const Review = require("./review");
+const { number, required } = require("joi");
 
 const listingSchema = new Schema({
   title: {
@@ -60,6 +61,10 @@ const listingSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  coordinates:{
+    type:[Number],
+    required : true
+  }
 });
 
 //mongoose middleware ....write it before model creation

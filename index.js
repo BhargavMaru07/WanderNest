@@ -72,7 +72,7 @@ app.use("/",userRoute)
 
 //Root route
 app.get("/", (req, res) => {
-  res.send("Hello, This is root");
+  res.send("this is root")
 });
 
 //Page not found

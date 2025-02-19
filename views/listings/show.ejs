@@ -45,8 +45,17 @@
           <button class="btn btn-danger">Delete</button>
         </form>
       </div>
+      <% } %>
+      <div class="col-6">
+        <div
+          id="map"
+          style="height: 500px"
+          data-lat="<%= individualListings.coordinates[0] %>"
+          data-lng="<%= individualListings.coordinates[1] %>"
+        ></div>
+      </div>
       <hr />
-      <% } %> <% if(currUser){ %>
+      <% if(currUser){ %>
       <div class="mb-3 mt-3">
         <h2 class="mb-3">Leave a Review</h2>
         <form

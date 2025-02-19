@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const geocodeAddress = require("../utils/geoLocation");
 
 module.exports.allListings = async (req, res) => {
   let allListings = await Listing.find({});
@@ -39,6 +40,12 @@ module.exports.newListing = async (req, res) => {
   //adding owner id from req object bcs passport store user in req object.
   newListing.owner = req.user._id;
 
+  //adding coordinates in db
+  let coors = await geocodeAddress(req.body.listing.location)
+  newListing.coordinates = [coors.lat,coors.lon];
+
+  // newListing.coordinates = await geocodeAddress()
+
   //adding url and filename in image field..
   // console.log(req.file)
   if (req.file) {
@@ -51,7 +58,8 @@ module.exports.newListing = async (req, res) => {
     };
   }
   
-  await newListing.save();
+  let savedListing = await newListing.save();
+  console.log(savedListing);
   req.flash("success", "New Listing Created!!");
   res.redirect("/listings");
 };
@@ -71,20 +79,45 @@ module.exports.renderEditForm = async (req, res) => {
   res.render("listings/edit", { listing,originalImageUrl });
 };
 
-module.exports.updateListing = async (req, res) => {
-  if (!req.body.listing) {
-    throw new ExpressError(404, "Send valid data for listing");
-  }
-  let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+module.exports.updateListing = async (req, res, next) => {
+  try {
+    if (!req.body.listing) {
+      throw new ExpressError(400, "Send valid data for listing");
+    }
 
-  //if image updated in edit file then only this code will run 
-  if(typeof req.file !== "undefined"){
-    listing.image = { url: req.file.path, filename: req.file.filename };
-    await listing.save();
+    let { id } = req.params;
+    let listing = await Listing.findByIdAndUpdate(
+      id,
+      { ...req.body.listing },
+      { new: true }
+    );
+
+    if (!listing) {
+      req.flash("error", "Listing not found!");
+      return res.redirect("/listings");
+    }
+
+    // Get new coordinates
+    try {
+      let coors = await geocodeAddress(req.body.listing.location);
+      listing.coordinates = [coors.lat, coors.lon];
+    } catch (error) {
+      console.error("Geocoding failed:", error);
+      req.flash("error", "Failed to update coordinates");
+    }
+
+    // If an image is uploaded, update it
+    if (req.file) {
+      listing.image = { url: req.file.path, filename: req.file.filename };
+    }
+
+    await listing.save(); // Ensure all changes are saved
+
+    req.flash("success", "Listing Updated!!");
+    res.redirect(`/listings/${id}`);
+  } catch (error) {
+    next(error); // Pass error to error-handling middleware
   }
-  req.flash("success", "Listing Updated!!");
-  res.redirect(`/listings/${id}`);
 };
 
 module.exports.deleteListing = async (req, res) => {

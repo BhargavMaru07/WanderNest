@@ -23,7 +23,6 @@ const isLoggedIn = (req, res, next) => {
 
  const saveRedirectUrl = (req,res,next)=>{
     if(req.session.redirectUrl){
-        console.log("in middleware: ",req.session.redirectUrl);
         res.locals.redirectUrl = req.session.redirectUrl;
     }
     next()
