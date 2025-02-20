@@ -20,6 +20,55 @@ t1.from(
   "-=1"
 );
 
+// Text and Image Content Animation (Hero Section)
+t1.from(".text-content", {
+  y: -200,
+  opacity: 0,
+  duration: 0.8,
+  ease: "power2.out",
+}, "-=0.8");
+
+t1.from(".image-content", {
+  y: -110,
+  opacity: 0,
+  duration: 0.8,
+  ease: "power2.out",
+}, "-=0.8");
+
+
+gsap.from(".category", {
+  y: -50,
+  opacity: 0,
+  duration: 0.3,
+  scrollTrigger: {
+    trigger: ".category",
+    scroller: "body",
+    markers: true,
+    start: "top 75%",
+    end: "top 65%",
+    scrub: 1,
+  },
+});
+
+
+
+// Animate Service Section Cards
+gsap.utils.toArray(".service").forEach((service, index) => {
+  gsap.from(service, {
+    y: 100,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: service,
+      start: "top 85%",
+      end: "top 50%",
+      scroller: "body",
+      scrub: 1.5,
+    },
+  });
+});
+
 let cards = gsap.utils.toArray(".card");
 
 function createRows() {

@@ -8,7 +8,7 @@ const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
 const Session = require("express-session");
-const cookieParser = require("cookie-parser");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash")
 const ExpressError = require("./utils/ExpressError");
 const listingsRoute = require("./routes/listingsRoute.js");
@@ -20,18 +20,31 @@ const User = require("./models/user.js");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(
-  Session({
-    secret: "Bhargav@#3",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly:true
-    },
-  })
-);
+
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGO_ATLAS_KEY,
+  crypto: {
+    secret: process.env.SESSION_SECRET,
+    touchAfter: 24 * 3600,
+  },
+});
+
+store.on("error",(err)=>{
+  console.log("ERROR IN MONGO STORE",err);
+})
+
+const sessionOptions = {
+  store,
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
+app.use(Session(sessionOptions));
 app.use(flash());
 
 //PASSPORT...
@@ -47,7 +60,8 @@ app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
-  next()
+  res.locals.page = ""; // Set default page value
+  next();
 })
 
 app.set("view engine", "ejs");
@@ -58,7 +72,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.engine("ejs", ejsMate);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/wandernest")
+  .connect(process.env.MONGO_ATLAS_KEY)
   .then(() => console.log("MongoDb is connected"))
   .catch((e) => console.log("Error in Mongodb", e));
 
@@ -72,7 +86,8 @@ app.use("/",userRoute)
 
 //Root route
 app.get("/", (req, res) => {
-  res.send("this is root")
+  res.locals.page = "home"
+  res.render("Home")
 });
 
 //Page not found

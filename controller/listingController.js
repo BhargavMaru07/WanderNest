@@ -3,6 +3,7 @@ const geocodeAddress = require("../utils/geoLocation");
 
 module.exports.allListings = async (req, res) => {
   let allListings = await Listing.find({});
+   res.locals.page = "listings";
   res.render("listings/index.ejs", { allListings });
 };
 
