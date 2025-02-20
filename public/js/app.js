@@ -37,16 +37,16 @@ t1.from(".image-content", {
 
 
 gsap.from(".category", {
-  y: -50,
+  y: 50,
   opacity: 0,
-  duration: 0.3,
+  duration: 0.1,
   scrollTrigger: {
     trigger: ".category",
     scroller: "body",
     markers: true,
     start: "top 75%",
-    end: "top 65%",
-    scrub: 1,
+    end: "top 70%",
+    scrub:true,
   },
 });
 
@@ -191,3 +191,83 @@ gsap.from(".title,.description,.image,.price-country,.location,.btn", {
   stagger: 0.2,
 });
 
+
+
+//session3
+
+// Proposal Section Animation
+  gsap.from(".proposal h1", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+  });
+
+  gsap.from(".proposal p", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    delay: 0.2,
+    ease: "power2.out",
+  });
+
+  gsap.from(".proposal-btn", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    delay: 0.4,
+    ease: "power2.out",
+  });
+
+  gsap.from(".proposal img", {
+    x: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+  });
+
+  // Case Study Section Animation
+  gsap.from(".casestudy h1", {
+    x: -100,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".casestudy",
+      start: "top 80%",
+      // end: "top 50%",
+      scroller: "body",
+      markers: true,
+    },
+  });
+
+  gsap.from(".casestudy p", {
+    x: 100,
+    opacity: 0,
+    duration: 1,
+    delay: 0.2,
+    scrollTrigger: {
+      trigger: ".casestudy",
+      start: "top 80%",
+      // end: "top 50%",
+      scroller: "body",
+      markers: true,
+    },
+  });
+
+  // Case Study Boxes Animation
+  gsap.utils.toArray(".case-box").forEach((box, index) => {
+    gsap.from(box, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      delay: index * 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: box,
+        start: "top 85%",
+        // end: "top 50%",
+        scroller: "body",
+        markers:true
+      },
+    });
+  });

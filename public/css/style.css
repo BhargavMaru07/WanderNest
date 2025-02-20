@@ -487,3 +487,53 @@ footer {
             text-align: center;
         }
     }
+
+
+  /* section 3 */
+
+  .section3 {
+  background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+}
+
+.proposal h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.proposal p {
+  font-size: 1.2rem;
+  color: #a5a5a5;
+}
+
+.proposal-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.casestudy p{
+  color: rgb(196, 196, 196);
+}
+
+.case-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.case-box h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #00aaff;
+  cursor: pointer;
+}
+
+.case-box:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+}
