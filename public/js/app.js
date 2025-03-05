@@ -1,40 +1,35 @@
 // Timeline for navbar and heading animations
 let t1 = gsap.timeline();
 
-t1.from(".navbar-brand, .nav-item, .d-flex", {
-  y: -30,
+t1.from(".gsap-navbar-icon, .gsap-nav-item", {
+  y: -40,
   duration: 0.5,
-  delay: 0.4,
+  delay: 0.3,
   opacity: 0,
-  stagger: 0.1,
 });
 
+// Text and Image Content Animation (Hero Section)
 t1.from(
-  ".all-listings-heading",
+  ".text-content",
   {
-    x: -200,
-    duration: 0.5,
-    delay: 0.2,
+    y: 130,
     opacity: 0,
+    duration: 0.8,
+    ease: "power2.out",
   },
-  "-=1"
+  "-=0.5"
 );
 
-// Text and Image Content Animation (Hero Section)
-t1.from(".text-content", {
-  y: -200,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power2.out",
-}, "-=0.8");
-
-t1.from(".image-content", {
-  y: -110,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power2.out",
-}, "-=0.8");
-
+t1.from(
+  ".image-content",
+  {
+    y: 130,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power2.out",
+  },
+  "-=0.8"
+);
 
 gsap.from(".f", {
   y: 100,
@@ -44,9 +39,9 @@ gsap.from(".f", {
     trigger: ".f",
     scroller: "body",
     // markers: true,
-    start: "top 75%",
-    end: "top 60%",
-    scrub:true,
+    start: "top 80%",
+    end: "top 65%",
+    scrub: true,
   },
 });
 gsap.from(".s", {
@@ -57,13 +52,11 @@ gsap.from(".s", {
     trigger: ".s",
     scroller: "body",
     // markers: true,
-    start: "top 75%",
-    end: "top 60%",
-    scrub:true,
+    start: "top 80%",
+    end: "top 65%",
+    scrub: true,
   },
 });
-
-
 
 // Animate Service Section Cards
 gsap.utils.toArray(".service").forEach((service, index) => {
@@ -175,18 +168,16 @@ window.addEventListener("resize", () => {
   });
 });
 
+//perticular card
 
-//perticular card 
-
-gsap.from(".information-heading",{
-    opacity : 0,
-    x : -300,
-    duration:1,
-    delay:0.3
+gsap.from(".information-heading", {
+  opacity: 0,
+  x: -300,
+  duration: 1,
+  delay: 0.3,
 });
 
-
-//new  & edit listings page 
+//new  & edit listings page
 
 gsap.from(".new-listings-heading,.edit-listings-heading", {
   opacity: 0,
@@ -194,7 +185,6 @@ gsap.from(".new-listings-heading,.edit-listings-heading", {
   duration: 1,
   delay: 0.3,
 });
-
 
 gsap.from(".title,.description,.image,.price-country,.location,.btn", {
   opacity: 0,
@@ -204,103 +194,99 @@ gsap.from(".title,.description,.image,.price-country,.location,.btn", {
   stagger: 0.2,
 });
 
-
-
 //session3
 
-// Proposal Section Animation
-  gsap.from(".proposal h1", {
-    y: 80,
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".proposal h1",
-      start: "top 85%",
-      end: "top 50%",
-      scroller: "body",
-      scrub: true,
-      // markers:true
-    },
-  });
+// // Proposal Section Animation
+// gsap.from(".proposal h1", {
+//   y: 80,
+//   opacity: 0,
+//   duration: 1,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".proposal h1",
+//     start: "top 85%",
+//     end: "top 50%",
+//     scroller: "body",
+//     scrub: true,
+//     // markers:true
+//   },
+// });
 
-  gsap.from(".proposal p", {
-    y: 80,
-    opacity: 0,
-    duration: 1,
-    delay: 0.3,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".proposal p",
-      start: "top 85%",
-      end: "top 50%",
-      scroller: "body",
-      scrub: true,
-      // markers: true,
-    },
-  });
+// gsap.from(".proposal p", {
+//   y: 80,
+//   opacity: 0,
+//   duration: 1,
+//   delay: 0.3,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".proposal p",
+//     start: "top 85%",
+//     end: "top 50%",
+//     scroller: "body",
+//     scrub: true,
+//     // markers: true,
+//   },
+// });
 
-  gsap.from(".section3-main-img", {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".section3-main-img",
-      start:"top 80%",
-      end:"top 50%",
-      scroller:"body",
-      scrub:true,
-      // markers:true
-    },
-  });
+// gsap.from(".section3-main-img", {
+//   y: 100,
+//   opacity: 0,
+//   duration: 1,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".section3-main-img",
+//     start: "top 80%",
+//     end: "top 50%",
+//     scroller: "body",
+//     scrub: true,
+//     // markers:true
+//   },
+// });
 
+// // Register ScrollTrigger
+// gsap.registerPlugin(ScrollTrigger);
 
-  // Register ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+// // Button Animation
+// gsap.from(".proposal-btn", {
+//   y: 80,
+//   opacity: 0,
+//   duration: 1,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".proposal",
+//     start: "top 85%",
+//     end: "top 50%",
+//     scroller: "body",
+//   },
+// });
 
-// Button Animation
-gsap.from(".proposal-btn", {
-  y: 80,
-  opacity: 0,
-  duration: 1,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: ".proposal",
-    start: "top 85%",
-    end: "top 50%",
-    scroller: "body",
-  },
-});
+// // Case Study Title Animation
+// gsap.from(".casestudy h1", {
+//   y: 100,
+//   opacity: 0,
+//   duration: 1,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".casestudy",
+//     start: "top 80%",
+//     end: "top 60%",
+//     scroller: "body",
+//     scrub: true, // Smooth scroll effect
+//   },
+// });
 
-// Case Study Title Animation
-gsap.from(".casestudy h1", {
-  y: 100,
-  opacity: 0,
-  duration: 1,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: ".casestudy",
-    start: "top 80%",
-    end: "top 60%",
-    scroller: "body",
-    scrub: true, // Smooth scroll effect
-  },
-});
-
-// Case Study Paragraph Animation
-gsap.from(".casestudy p", {
-  y: 100,
-  opacity: 0,
-  duration: 1,
-  delay:0.1,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: ".casestudy",
-    start: "top 85%",
-    end: "top 60%",
-    scroller: "body",
-    scrub: true,
-  },
-});
-
+// // Case Study Paragraph Animation
+// gsap.from(".casestudy p", {
+//   y: 100,
+//   opacity: 0,
+//   duration: 1,
+//   delay: 0.1,
+//   ease: "power2.out",
+//   scrollTrigger: {
+//     trigger: ".casestudy",
+//     start: "top 85%",
+//     end: "top 60%",
+//     scroller: "body",
+//     scrub: true,
+//   },
+// });
