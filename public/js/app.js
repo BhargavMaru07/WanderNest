@@ -31,32 +31,159 @@ t1.from(
   "-=0.8"
 );
 
-gsap.from(".f", {
-  y: 100,
-  opacity: 0,
-  duration: 0.5,
+// gsap.from(".f", {
+//   y: 100,
+//   opacity: 0,
+//   duration: 0.5,
+//   scrollTrigger: {
+//     trigger: ".f",
+//     scroller: "body",
+//     // markers: true,
+//     start: "top 80%",
+//     end: "top 65%",
+//     scrub: true,
+//   },
+// });
+// gsap.from(".s", {
+//   y: -100,
+//   opacity: 0,
+//   duration: 0.5,
+//   scrollTrigger: {
+//     trigger: ".s",
+//     scroller: "body",
+//     // markers: true,
+//     start: "top 80%",
+//     end: "top 65%",
+//     scrub: true,
+//   },
+// });
+
+// Check screen width
+let screenWidth = window.innerWidth;
+
+if (screenWidth >= 1200) {
+  // Large screens (6 per row) - Odd cards from left, Even cards from right
+  gsap.from(".f", {
+    y: 100,
+    opacity: 0,
+    duration: 0.5,
+    scrollTrigger: {
+      trigger: ".f",
+      scroller: "body",
+      // markers: true,
+      start: "top 80%",
+      end: "top 65%",
+      scrub: true,
+    },
+  });
+
+  gsap.from(".s", {
+    y: -100,
+    opacity: 0,
+    duration: 0.5,
+    scrollTrigger: {
+      trigger: ".s",
+      scroller: "body",
+      // markers: true,
+      start: "top 80%",
+      end: "top 65%",
+      scrub: true,
+    },
+  });
+} else {
+  // Below 1200px - All cards from bottom to top
+  gsap.from(".category", {
+    y: 100,
+    opacity: 0,
+    duration: 0.7,
+    scrollTrigger: {
+      trigger: ".category",
+      scroller: "body",
+      // markers: true,
+      start: "top 85%",
+      end: "top 70%",
+      scrub: true,
+    },
+  });
+}
+
+// Reapply animation on window resize
+window.addEventListener("resize", () => {
+  gsap.killTweensOf(".category"); // Clear previous animations
+  screenWidth = window.innerWidth;
+
+  if (screenWidth >= 1200) {
+    gsap.from(".f", {
+      y: 100,
+      opacity: 0,
+      duration: 0.5,
+      scrollTrigger: {
+        trigger: ".f",
+        scroller: "body",
+        // markers: true,
+        start: "top 80%",
+        end: "top 65%",
+        scrub: true,
+      },
+    });
+
+    gsap.from(".s", {
+      y: -100,
+      opacity: 0,
+      duration: 0.5,
+      scrollTrigger: {
+        trigger: ".s",
+        scroller: "body",
+        // markers: true,
+        start: "top 80%",
+        end: "top 65%",
+        scrub: true,
+      },
+    });
+  } else {
+    gsap.from(".category", {
+      y: 100,
+      opacity: 0,
+      duration: 0.7,
+      scrollTrigger: {
+        trigger: ".category",
+        scroller: "body",
+        // markers: true,
+        start: "top 85%",
+        end: "top 70%",
+        scrub: true,
+      },
+    });
+  }
+});
+
+let t2 = gsap.timeline({
   scrollTrigger: {
-    trigger: ".f",
+    trigger: ".services",
     scroller: "body",
-    // markers: true,
-    start: "top 80%",
-    end: "top 65%",
-    scrub: true,
+    start: "top 85%",
+    end: "top 60%",
+    scrub: 0.5,
   },
 });
-gsap.from(".s", {
-  y: -100,
+
+t2.from(".services h1", {
+  y: 80,
   opacity: 0,
-  duration: 0.5,
-  scrollTrigger: {
-    trigger: ".s",
-    scroller: "body",
-    // markers: true,
-    start: "top 80%",
-    end: "top 65%",
-    scrub: true,
-  },
+  duration: 1,
+  ease: "power2.out",
 });
+
+t2.from(
+  ".services p",
+  {
+    y: 80,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+  },
+  "-=0.5"
+);
 
 // Animate Service Section Cards
 gsap.utils.toArray(".service").forEach((service, index) => {
