@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-  <h1 class="col-6 offset-3">SignUp For WanderNest</h1>
-  <div class="col-6 offset-3">
+<div class="signup-main-div">
+  <h1>SignUp For WanderNest</h1>
+  <div class="signup-form-div">
     <form action="/signup" method="post" novalidate class="needs-validation">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
@@ -40,7 +40,10 @@
         <div class="valid-feedback">password Looks good!</div>
         <div class="invalid-feedback">password is required!</div>
       </div>
-      <button class="btn btn-outline-dark mb-3" type="submit">SignUp</button>
+      <button class="signup-btn" type="submit">SignUp</button>
     </form>
+    <div class="login-line"> 
+      Welcome back, traveler! Ready to explore more?  <span><a href="/login">Login</a></span>
+    </div>
   </div>
 </div>

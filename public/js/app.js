@@ -294,125 +294,31 @@ window.addEventListener("resize", () => {
   });
 });
 
-//perticular card
 
-gsap.from(".information-heading", {
-  opacity: 0,
-  x: -300,
-  duration: 1,
-  delay: 0.3,
-});
 
-//new  & edit listings page
 
-gsap.from(".new-listings-heading,.edit-listings-heading", {
-  opacity: 0,
-  x: -300,
-  duration: 1,
-  delay: 0.3,
-});
+// //perticular card
 
-gsap.from(".title,.description,.image,.price-country,.location,.btn", {
-  opacity: 0,
-  y: -100,
-  duration: 0.4,
-  delay: 0.3,
-  stagger: 0.2,
-});
-
-//session3
-
-// // Proposal Section Animation
-// gsap.from(".proposal h1", {
-//   y: 80,
+// gsap.from(".information-heading", {
 //   opacity: 0,
-//   duration: 1,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".proposal h1",
-//     start: "top 85%",
-//     end: "top 50%",
-//     scroller: "body",
-//     scrub: true,
-//     // markers:true
-//   },
-// });
-
-// gsap.from(".proposal p", {
-//   y: 80,
-//   opacity: 0,
+//   x: -300,
 //   duration: 1,
 //   delay: 0.3,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".proposal p",
-//     start: "top 85%",
-//     end: "top 50%",
-//     scroller: "body",
-//     scrub: true,
-//     // markers: true,
-//   },
 // });
 
-// gsap.from(".section3-main-img", {
-//   y: 100,
+// //new  & edit listings page
+
+// gsap.from(".new-listings-heading,.edit-listings-heading", {
 //   opacity: 0,
+//   x: -300,
 //   duration: 1,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".section3-main-img",
-//     start: "top 80%",
-//     end: "top 50%",
-//     scroller: "body",
-//     scrub: true,
-//     // markers:true
-//   },
+//   delay: 0.3,
 // });
 
-// // Register ScrollTrigger
-// gsap.registerPlugin(ScrollTrigger);
-
-// // Button Animation
-// gsap.from(".proposal-btn", {
-//   y: 80,
+// gsap.from(".title,.description,.image,.price-country,.location,.btn", {
 //   opacity: 0,
-//   duration: 1,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".proposal",
-//     start: "top 85%",
-//     end: "top 50%",
-//     scroller: "body",
-//   },
-// });
-
-// // Case Study Title Animation
-// gsap.from(".casestudy h1", {
-//   y: 100,
-//   opacity: 0,
-//   duration: 1,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".casestudy",
-//     start: "top 80%",
-//     end: "top 60%",
-//     scroller: "body",
-//     scrub: true, // Smooth scroll effect
-//   },
-// });
-
-// // Case Study Paragraph Animation
-// gsap.from(".casestudy p", {
-//   y: 100,
-//   opacity: 0,
-//   duration: 1,
-//   delay: 0.1,
-//   ease: "power2.out",
-//   scrollTrigger: {
-//     trigger: ".casestudy",
-//     start: "top 85%",
-//     end: "top 60%",
-//     scroller: "body",
-//     scrub: true,
-//   },
+//   y: -100,
+//   duration: 0.4,
+//   delay: 0.3,
+//   stagger: 0.2,
 // });
