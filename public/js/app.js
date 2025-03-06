@@ -31,131 +31,30 @@ t1.from(
   "-=0.8"
 );
 
-// gsap.from(".f", {
-//   y: 100,
-//   opacity: 0,
-//   duration: 0.5,
-//   scrollTrigger: {
-//     trigger: ".f",
-//     scroller: "body",
-//     // markers: true,
-//     start: "top 80%",
-//     end: "top 65%",
-//     scrub: true,
-//   },
-// });
-// gsap.from(".s", {
-//   y: -100,
-//   opacity: 0,
-//   duration: 0.5,
-//   scrollTrigger: {
-//     trigger: ".s",
-//     scroller: "body",
-//     // markers: true,
-//     start: "top 80%",
-//     end: "top 65%",
-//     scrub: true,
-//   },
-// });
+//For caregories
 
-// Check screen width
-let screenWidth = window.innerWidth;
+let categories = gsap.utils.toArray(".category"); // Select all categories
 
-if (screenWidth >= 1200) {
-  // Large screens (6 per row) - Odd cards from left, Even cards from right
-  gsap.from(".f", {
-    y: 100,
-    opacity: 0,
-    duration: 0.5,
-    scrollTrigger: {
-      trigger: ".f",
-      scroller: "body",
-      // markers: true,
-      start: "top 80%",
-      end: "top 65%",
-      scrub: true,
-    },
-  });
+gsap.set(categories, { opacity: 0, y: 100 }); // Set initial state (hidden, moved down)
 
-  gsap.from(".s", {
-    y: -100,
-    opacity: 0,
-    duration: 0.5,
-    scrollTrigger: {
-      trigger: ".s",
-      scroller: "body",
-      // markers: true,
-      start: "top 80%",
-      end: "top 65%",
-      scrub: true,
-    },
-  });
-} else {
-  // Below 1200px - All cards from bottom to top
-  gsap.from(".category", {
-    y: 100,
-    opacity: 0,
-    duration: 0.7,
-    scrollTrigger: {
-      trigger: ".category",
-      scroller: "body",
-      // markers: true,
-      start: "top 85%",
-      end: "top 70%",
-      scrub: true,
-    },
-  });
-}
+gsap.to(categories, {
+  y: 0, // Move to original position
+  opacity: 1, // Make visible
+  duration: 0.8,
+  ease: "power2.out", // Smooth easing
+  stagger: 0.2, // Cards animate one after another
 
-// Reapply animation on window resize
-window.addEventListener("resize", () => {
-  gsap.killTweensOf(".category"); // Clear previous animations
-  screenWidth = window.innerWidth;
-
-  if (screenWidth >= 1200) {
-    gsap.from(".f", {
-      y: 100,
-      opacity: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: ".f",
-        scroller: "body",
-        // markers: true,
-        start: "top 80%",
-        end: "top 65%",
-        scrub: true,
-      },
-    });
-
-    gsap.from(".s", {
-      y: -100,
-      opacity: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: ".s",
-        scroller: "body",
-        // markers: true,
-        start: "top 80%",
-        end: "top 65%",
-        scrub: true,
-      },
-    });
-  } else {
-    gsap.from(".category", {
-      y: 100,
-      opacity: 0,
-      duration: 0.7,
-      scrollTrigger: {
-        trigger: ".category",
-        scroller: "body",
-        // markers: true,
-        start: "top 85%",
-        end: "top 70%",
-        scrub: true,
-      },
-    });
-  }
+  scrollTrigger: {
+    trigger: ".categories-container",
+    scroller: "body",
+    start: "top 85%",
+    end: "top 60%",
+    scrub: true, // Smooth animation while scrolling
+    once: false, // Animation triggers again if user scrolls back
+  },
 });
+
+//Session 2
 
 let t2 = gsap.timeline({
   scrollTrigger: {
@@ -198,6 +97,106 @@ gsap.utils.toArray(".service").forEach((service, index) => {
       end: "top 50%",
       scroller: "body",
       scrub: 1.5,
+    },
+  });
+});
+
+//Session 3
+
+gsap.registerPlugin(ScrollTrigger);
+
+let proposalTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".proposal",
+    start: "top 85%",
+    end: "top 70%",
+    scrub: 1,
+  },
+});
+
+proposalTl
+  .from(".proposal h1", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+  })
+  .from(
+    ".proposal p",
+    {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    },
+    "-=0.5"
+  ) // Overlapping effect for a smoother transition
+  .from(
+    ".proposal-btn",
+    {
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.7,
+      ease: "back.out(1.7)",
+    },
+    "-=0.5"
+  ); // Overlapping effect for a natural feel
+
+// Image Animation
+gsap.from(".section3-main-img img", {
+  scale: 0.2,
+  opacity: 0,
+  duration: 1,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".section3-main-img",
+    start: "top 90%",
+    end: "top 75%",
+    scrub: 1,
+  },
+});
+
+// Case Study Title & Paragraph
+gsap.from(".casestudy h1", {
+  y: 50,
+  opacity: 0,
+  duration: 1,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".casestudy",
+    start: "top 85%",
+    end: "top 70%",
+    scrub: 1,
+  },
+});
+
+gsap.from(".casestudy p", {
+  y: 50,
+  opacity: 0,
+  duration: 1,
+  ease: "power2.out",
+  delay: 0.2,
+  scrollTrigger: {
+    trigger: ".casestudy",
+    start: "top 85%",
+    end: "top 70%",
+    scrub: 1,
+  },
+});
+
+let caseStudyCards = gsap.utils.toArray(".case-box");
+
+caseStudyCards.forEach((card, index) => {
+  gsap.from(card, {
+    y: 100,
+    opacity: 0,
+    duration: 0.5,
+    scrollTrigger: {
+      trigger: card, // Each box animates when it enters viewport
+      start: "top 90%",
+      end: "top 80%",
+      toggleActions: "play none none reset",
+      scrub: true, // Smooth animation while scrolling
     },
   });
 });
