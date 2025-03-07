@@ -220,6 +220,17 @@ caseStudyCards.forEach((card, index) => {
    stagger: 0.2,
  });
 
+
+ //create listing 
+
+  gsap.from(".gsap-form", {
+    opacity: 0,
+    y: 50,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+
+
 let cards = gsap.utils.toArray(".card");
 
 function createRows() {
