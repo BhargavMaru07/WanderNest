@@ -201,6 +201,25 @@ caseStudyCards.forEach((card, index) => {
   });
 });
 
+
+// login and signup
+ gsap.from(".signup-main-div h1,.login-main-div h1", {
+   opacity: 0,
+   y: 80,
+   scale: 0.6,
+   duration: 1.2,
+   ease: "power3.out",
+ });
+
+ gsap.from(".signup-form-div, .form-div", {
+   opacity: 0,
+   y: 190,
+   duration: 1.2,
+   scale: 0.8,
+   ease: "power3.out",
+   stagger: 0.2,
+ });
+
 let cards = gsap.utils.toArray(".card");
 
 function createRows() {

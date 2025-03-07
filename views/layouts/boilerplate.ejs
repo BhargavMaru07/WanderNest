@@ -67,5 +67,15 @@
       crossorigin=""
     ></script>
     <script src="/js/map.js"></script>
+    <script>
+      setTimeout(() => {
+        let flashMessage = document.querySelector(".alert");
+        if (flashMessage) {
+          flashMessage.style.transition = "opacity 0.5s";
+          flashMessage.style.opacity = "0";
+          setTimeout(() => flashMessage.remove(), 500);
+        }
+      }, 1200); // Disappear after 3 sec
+    </script>
   </body>
 </html>
