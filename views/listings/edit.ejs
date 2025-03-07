@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<body>
-  <div class="row">
-    <div class="col-8 offset-2">
-      <h1 class="mb-3 mt-3 edit-listings-heading">Edit your listing</h1>
+<body class="edit-listing-body container-fluid p-0">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8 gsap-form">
+      <h1 class="mb-3 edit-listings-heading">Edit Listing</h1>
       <form
         method="post"
         action="/listings/update/<%= listing._id %>?_method=PUT"

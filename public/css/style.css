@@ -603,52 +603,6 @@ footer {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* login page  */
-/* 
-.login-main-div,.signup-main-div{
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  justify-content: center;
-  align-items: center;
-  
-
-}
-
-.login-main-div h1,.signup-main-div h1{
-  margin: 0;
-  padding: 0;
-  width: 50vw;
-}
-
-.login-main-div .form-div, .signup-form-div{
-  width: 50vw;
-}
-
-@media (max-width: 800px) {
-  .login-main-div h1,.signup-main-div h1{
-    width: 70vw;
-    font-size: 30px;
-}
-
-.login-main-div .form-div,.signup-form-div{
-  width: 70vw;
-}
-}
-
-@media (max-width: 470px) {
-  .login-main-div h1 ,.signup-main-div h1{
-    width: 80vw;
-    font-size: 22px;
-}
-
-.login-main-div .form-div,.signup-form-div{
-  width: 80vw;
-}
-}
-
- */
 
 .login-main-div,
 .signup-main-div {
@@ -803,14 +757,14 @@ footer {
 /* create listing styling */
 
 
-.create-new-listing-body {
+.create-new-listing-body,.edit-listing-body {
   /* background: linear-gradient(to right, #181818, #222222);   */
   background: linear-gradient(to right, #252525, #333333);
   background-attachment: fixed;
   background-size: cover;
 }
 
-.create-new-listing-body .row{
+.create-new-listing-body .row,.edit-listing-body .row{
     margin-bottom: 30px;
 }
 
