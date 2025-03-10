@@ -33,6 +33,21 @@ t1.from(
 
 //For caregories
 
+gsap.from(".top-categories-heading", {
+  y:50,
+  opacity: 0,
+  duration: 0.6,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".top-categories-heading",
+    scroller: "body",
+    start: "top 85%",
+    end: "top 60%",
+    scrub: true, 
+    once: false, // Animation triggers again if user scrolls back
+  },
+});
+
 let categories = gsap.utils.toArray(".category"); // Select all categories
 
 gsap.set(categories, { opacity: 0, y: 100 }); // Set initial state (hidden, moved down)

@@ -374,6 +374,39 @@ footer {
   transform: rotate(180deg);
 }
 
+
+.top-categories-heading {
+  font-size: 23px;
+  font-weight: bold;
+  color: #fff;
+  margin: 50px 0px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .top-categories-heading {
+    font-size: 20px; /* Slightly smaller for tablets */
+  }
+}
+
+@media (max-width: 576px) {
+  .top-categories-heading {
+    font-size: 18px; /* Even smaller for mobile devices */
+    margin: 30px 0px; /* Reduce margin for better spacing */
+  }
+}
+
+@media (max-width: 400px) {
+  .top-categories-heading {
+    font-size: 16px; /* Smallest for very small screens */
+    margin: 20px 0px;
+  }
+}
+
+
 /* Categories Grid - Ensures 6 per row and wraps */
 .categories-container {
   display: flex;
