@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
-const { isLoggedIn, isOwner,validateListing } = require("../middleware");
-const listingController = require("../controller/listingController.js")
+const { isLoggedIn, isOwner, validateListing } = require("../middleware");
+const listingController = require("../controller/listingController.js");
 const multer = require("multer");
-const {storage} = require("../cloudConfig.js")
-const upload = multer({storage});
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
 
 //GET ALL LISTING
 //POST LISTING
@@ -28,11 +28,7 @@ router.get("/new", isLoggedIn, listingController.renderNewListingForm);
 router
   .route("/:id")
   .get(wrapAsync(listingController.showIndividualListing))
-  .delete(
-    isLoggedIn,
-    isOwner,
-    wrapAsync(listingController.deleteListing)
-  );
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
 
 //Edit route
 router.get(
@@ -51,5 +47,8 @@ router.put(
   validateListing,
   wrapAsync(listingController.updateListing)
 );
+
+//search
+router.get("/indivisual/search", wrapAsync(listingController.searchListings));
 
 module.exports = router;

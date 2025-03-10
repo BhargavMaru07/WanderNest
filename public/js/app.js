@@ -248,6 +248,25 @@ gsap.from(".search-container",{
   delay:0.3
 });
 
+gsap.from(".no-lisitng-found-para", {
+  y: -80,
+  opacity: 0,
+  duration: 0.7,
+  delay: 0.3,
+});
+gsap.from(".to-get-all-listings", {
+  y: -50,
+  opacity: 0,
+  duration: 0.7,
+  delay: 0.6,
+});
+gsap.from(".get-all-btn", {
+  y: -10,
+  opacity:0,
+  delay:0.8,
+  duration: 0.8,
+});
+
 let cards = gsap.utils.toArray(".listing-card");
 
 function createRows() {

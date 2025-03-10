@@ -1,16 +1,26 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
   <div class="all-listing-page">
-
-      <div class="search-container">
+    <form
+      action="/listings/indivisual/search"
+      method="GET"
+      class="search-container"
+    >
       <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Search listings..." />
-        <button id="searchBtn">
+        <input
+          type="text"
+          id="searchInput"
+          name="query"
+          placeholder="Search Listings..."
+          required
+        />
+        <button type="submit" id="searchBtn">
           <i class="fas fa-search"></i> Search
         </button>
       </div>
-    </div>
-    
+    </form>
+
+    <%if(allListings.length > 0){ %>
     <h2 class="mt-3 mb-3 all-listings-heading">All Listings</h2>
     <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
       <% for(let listing of allListings){ %>
@@ -36,5 +46,16 @@
       </a>
       <%}%>
     </div>
+    <% } else { %>
+    <div class="no-listing-found-div">
+      <p class="no-lisitng-found-para">Oops ! Listing is not Found 🙁</p>
+      <p class="to-get-all-listings">
+        Seems like your dream stay is playing hide and seek! 🏡🔍
+        <br />
+        Click below to fetch all listings.
+      </p>
+      <a href="/listings" class="get-all-btn">GET ALL</a>
+    </div>
+    <%}%>
   </div>
 </body>

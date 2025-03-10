@@ -11,6 +11,25 @@ module.exports.renderNewListingForm = (req, res) => {
   res.render("listings/new");
 };
 
+module.exports.searchListings = async (req, res) => {
+  const searchQuery = req.query.query;
+  if (!searchQuery) {
+    return res.redirect("/listings");
+  }
+
+  // Perform case-insensitive search on title, location, or country
+  const searchResults = await Listing.find({
+    $or: [
+      { title: { $regex: searchQuery, $options: "i" } }, // Search in title
+      { location: { $regex: searchQuery, $options: "i" } }, // Search in location
+      { country: { $regex: searchQuery, $options: "i" } }, // Search in country
+    ],
+  });
+
+  // Render the same listings page but with filtered results
+  res.render("listings/index.ejs", { allListings:searchResults, page: "allListingPage" });
+};
+
 module.exports.showIndividualListing = async (req, res) => {
   let { id } = req.params;
   let individualListings = await Listing.findById(id)
