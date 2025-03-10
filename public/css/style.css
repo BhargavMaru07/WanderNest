@@ -755,7 +755,7 @@ footer {
 }
 
 /* create listing styling */
-
+.contactUs-form-body,
 .create-new-listing-body,
 .edit-listing-body {
   /* background: linear-gradient(to right, #181818, #222222);   */
@@ -765,6 +765,7 @@ footer {
 }
 
 .create-new-listing-body .row,
+.contactUs-form-body .row,
 .edit-listing-body .row {
   margin-bottom: 30px;
 }
@@ -1137,8 +1138,6 @@ footer {
   background-color: #0088cc;
   border-color: #006699;
 }
-
-
 
 
 

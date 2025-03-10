@@ -90,6 +90,20 @@ app.get("/", (req, res) => {
   res.render("Home")
 });
 
+//For Contact Us
+app.get("/contactUs",(req,res)=>{
+  res.render("Contact")
+});
+
+app.post("/contactUs",(req,res)=>{
+  let data = req.body; 
+   req.flash(
+     "success",
+     "Thanks for contacting us! We'll respond as soon as possible."
+   );
+   res.redirect("/listings");
+});
+
 //Page not found
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
