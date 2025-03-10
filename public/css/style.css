@@ -34,17 +34,29 @@ body {
   left: 0;
 }
 
+.navbar-toggler {
+  border: 1px solid rgba(0, 255, 255, 0.5) !important; /* Cyan border */
+  background-color: rgba(30, 30, 30, 0.9) !important; /* Dark background */
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+/* Styling the toggler icon */
+.navbar-toggler-icon {
+  filter: brightness(150%) invert(1); /* Makes the icon brighter */
+}
+
+/* Hover effect */
+.navbar-toggler:hover {
+  background-color: rgba(0, 255, 255, 0.2) !important;
+}
+
+
 .fa-compass {
   color: #fe424d;
   font-size: 2rem;
   transition: transform 0.5s ease-in-out;
   animation: spin 3s linear infinite;
-
-  &:hover {
-    /* transform: scale(1.02); */
-    /* animation-play-state: paused; */
-    /* animation: none; */
-  }
 }
 
 @keyframes spin {
@@ -137,49 +149,6 @@ footer {
   }
   .f-links {
     order: 3;
-  }
-}
-
-.card {
-  border: none !important;
-  margin-bottom: 2rem;
-}
-
-.card img {
-  border-radius: 1rem !important;
-  width: 100% !important;
-  object-fit: cover !important;
-}
-
-.card-body {
-  padding: 0 !important;
-}
-
-.card-text {
-  font-weight: 400 !important;
-}
-
-.listing-link {
-  text-decoration: none;
-}
-
-.card-img-overlay {
-  opacity: 0;
-
-  &:hover {
-    opacity: 0.2;
-    background-color: white;
-    cursor: pointer;
-  }
-}
-
-.add-btn,
-.edit-btn {
-  background-color: #fe424d !important;
-  border: none !important;
-
-  &:hover {
-    background-color: #dd1b28 !important ;
   }
 }
 
@@ -603,7 +572,6 @@ footer {
   background: rgba(255, 255, 255, 0.2);
 }
 
-
 .login-main-div,
 .signup-main-div {
   height: 100vh;
@@ -756,24 +724,25 @@ footer {
 
 /* create listing styling */
 
-
-.create-new-listing-body,.edit-listing-body {
+.create-new-listing-body,
+.edit-listing-body {
   /* background: linear-gradient(to right, #181818, #222222);   */
   background: linear-gradient(to right, #252525, #333333);
   background-attachment: fixed;
   background-size: cover;
 }
 
-.create-new-listing-body .row,.edit-listing-body .row{
-    margin-bottom: 30px;
+.create-new-listing-body .row,
+.edit-listing-body .row {
+  margin-bottom: 30px;
 }
 
 .gsap-form {
-  min-height: 100vh; 
+  min-height: 100vh;
   display: flex;
   gap: 10px;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }
 
@@ -787,11 +756,11 @@ footer {
 .gsap-form form {
   width: 100%;
   max-width: 900px;
-  background: rgba(30, 30, 30, 0.85); 
+  background: rgba(30, 30, 30, 0.85);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.25); 
-  border: 1px solid rgba(0, 255, 255, 0.25); 
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.25);
+  border: 1px solid rgba(0, 255, 255, 0.25);
   color: whitesmoke;
 }
 
@@ -800,7 +769,7 @@ footer {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-  background: rgba(50, 50, 50, 0.9); 
+  background: rgba(50, 50, 50, 0.9);
   border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 8px;
   color: white !important;
@@ -865,7 +834,6 @@ footer {
   background: #ff4b5c;
 }
 
-
 @media (max-width: 900px) {
   .gsap-form form {
     max-width: 700px !important;
@@ -897,11 +865,6 @@ footer {
     padding: 15px;
   }
 }
-
-
-
-
-
 
 /* footer  */
 footer {
@@ -946,3 +909,159 @@ footer {
 .f-links a:hover {
   opacity: 0.7;
 }
+
+/* all listing  */
+
+.all-listing-page {
+  background: linear-gradient(to right, #252525, #333333) !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  padding: 20px 40px;
+}
+
+.all-listing-page h2 {
+  color: whitesmoke !important;
+}
+
+.listing-card {
+  background: rgba(30, 30, 30, 0.85) !important;
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.25) !important;
+  border: 1px solid rgba(0, 255, 255, 0.25) !important;
+  color: whitesmoke !important;
+  margin-bottom: 2rem;
+  transition: box-shadow 0.3s ease-in-out !important;
+}
+
+.listing-card:hover {
+  box-shadow: 0px 6px 20px rgba(0, 255, 255, 0.5) !important;
+  cursor: pointer;
+}
+
+.card-img-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.listing-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.listing-card-body {
+  padding: 10px !important;
+}
+
+.listing-card-text {
+  font-weight: 400 !important;
+}
+
+.listing-link {
+  text-decoration: none;
+}
+
+.add-btn,
+.edit-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+
+  &:hover {
+    background-color: #dd1b28 !important ;
+  }
+}
+
+
+
+/* Search Bar Container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0px;
+  padding: 0 10px;
+}
+
+/* Wrapper for input and button */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: 30px;
+  width: 90%; 
+  max-width: 800px;
+}
+
+/* Search Input */
+#searchInput {
+  flex: 1;
+  background: rgba(10, 10, 10, 1);
+  border: none;
+  padding: 15px 20px;
+  color: whitesmoke;
+  font-size: 16px;
+  outline: none;
+  border-radius: 30px 0 0 30px;
+  min-width: 0; 
+}
+
+/* Bright border on focus */
+#searchInput:focus {
+  border: 1px solid cyan;
+  box-shadow: 0px 0px 5px rgba(0, 255, 255, 0.6);
+}
+
+/* Search Button */
+#searchBtn {
+  background: rgba(30, 30, 30, 0.85);
+  color: whitesmoke;
+  border: none; 
+  padding: 15px 20px; 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 0 30px 30px 0;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Hover Effect */
+#searchBtn:hover {
+  background: cyan;
+  color: black;
+}
+
+/* Search Icon */
+#searchBtn i {
+  margin-right: 5px;
+}
+
+/* Responsive Fixes */
+
+@media (max-width: 576px) {
+  .search-wrapper {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  #searchInput {
+    font-size: 14px;
+    padding: 12px 15px;
+    border-radius: 20px 0 0 20px;
+  }
+
+  #searchBtn {
+    font-size: 12px;
+    padding: 12px 14px; 
+    border-radius: 0 20px 20px 0;
+    height: 100%; 
+  }
+}
+
+

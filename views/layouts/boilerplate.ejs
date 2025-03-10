@@ -31,13 +31,13 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-  </head>
+  </head> 
   <body>
     <%- include("../includes/nav.ejs") %> <% if (page !== 'home' && page !==
-    'login' && page !== 'signup') { %>
+    'login' && page !== 'signup' && page !== 'allListingPage') { %>
     <div class="container">
       <% } %> <%- include("../includes/flash.ejs") %> <%- body %> <% if (page
-      !== 'home' && page !== 'login' && page !== 'signup') { %>
+      !== 'home' && page !== 'login' && page !== 'signup' && page !== 'allListingPage') { %>
     </div>
     <% } %> <%- include("../includes/footer.ejs") %>
 

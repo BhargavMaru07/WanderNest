@@ -231,7 +231,24 @@ caseStudyCards.forEach((card, index) => {
   });
 
 
-let cards = gsap.utils.toArray(".card");
+
+//all listings
+
+gsap.from(".all-listings-heading",{
+  x:-300,
+  opacity:0,
+  duration:0.7,
+  delay:0.3
+});
+
+gsap.from(".search-container",{
+  y:-50,
+  opacity:0,
+  duration:0.7,
+  delay:0.3
+});
+
+let cards = gsap.utils.toArray(".listing-card");
 
 function createRows() {
   let rows = [];
@@ -296,33 +313,33 @@ rows.slice(2).forEach((row) => {
 
 // Recalculate rows when the window is resized (to handle responsiveness)
 
-window.addEventListener("resize", () => {
-  rows = createRows();
+// window.addEventListener("resize", () => {
+//   rows = createRows();
 
-  // Clear any existing animations and reapply them based on the new row setup
+//   // Clear any existing animations and reapply them based on the new row setup
 
-  t1.kill();
+//   t1.kill();
 
-  t1 = gsap.timeline();
+//   t1 = gsap.timeline();
 
-  rows.slice(0, 2).forEach((row, index) => {
-    animateRow(row, t1, index === 0 ? 0.5 : index * 0.7); // Slight delay between rows
-  });
+//   rows.slice(0, 2).forEach((row, index) => {
+//     animateRow(row, t1, index === 0 ? 0.5 : index * 0.7); // Slight delay between rows
+//   });
 
-  rows.slice(2).forEach((row) => {
-    let scrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: row[0], // Use the first card in the row as the trigger
-        start: "top 80%",
-        end: "top 50%",
-        scroller: "body",
-        scrub: 1.5,
-        // markers: true, // Optional for debugging
-      },
-    });
-    animateRow(row, scrollTimeline);
-  });
-});
+//   rows.slice(2).forEach((row) => {
+//     let scrollTimeline = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: row[0], // Use the first card in the row as the trigger
+//         start: "top 80%",
+//         end: "top 50%",
+//         scroller: "body",
+//         scrub: 1.5,
+//         // markers: true, // Optional for debugging
+//       },
+//     });
+//     animateRow(row, scrollTimeline);
+//   });
+// });
 
 
 

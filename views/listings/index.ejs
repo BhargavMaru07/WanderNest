@@ -1,23 +1,35 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
-  <h2 class="mt-3 mb-3 all-listings-heading">All Listings</h2>
-  <div class="container">
+  <div class="all-listing-page">
+
+      <div class="search-container">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search listings..." />
+        <button id="searchBtn">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+    </div>
+    
+    <h2 class="mt-3 mb-3 all-listings-heading">All Listings</h2>
     <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
       <% for(let listing of allListings){ %>
       <a href="/listings/<%= listing.id %>" class="listing-link">
-        <div class="card h-100">
-          <div class="ratio ratio-4x3">
+        <div class="card listing-card h-100">
+          <div class="card-img-wrapper">
             <img
               src="<%= listing.image.url %>"
               class="card-img-top img-fluid"
               alt="listing_image"
             />
           </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-body">
-            <p class="card-text">
+          <div class="card-body listing-card-body">
+            <p class="card-text listing-card-text">
               <b><%= listing.title %></b> <br />
               &#8377; <%= listing.price.toLocaleString("en-IN") %>/ night
+            </p>
+            <p class="listing-info">
+              📍 <%= listing.location %>, <%= listing.country %>
             </p>
           </div>
         </div>
