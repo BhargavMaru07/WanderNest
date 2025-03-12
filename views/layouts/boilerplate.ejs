@@ -81,50 +81,48 @@
         }
       }, 2500);
     </script>
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const loader = document.getElementById("loading-screen");
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loader = document.getElementById("loading-screen");
 
-    // Ensure the loader is visible immediately on page refresh
-    loader.style.display = "flex";
-
-    // Remove loader when the page is fully loaded
-    window.addEventListener("load", function () {
-      gsap.to("#loading-screen", {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-          loader.style.display = "none";
-        },
-      });
-    });
-
-    // Show loader when clicking on links or buttons that navigate
-    document.addEventListener("click", function (e) {
-      const target = e.target.closest("a, button");
-      if (target && target.getAttribute("href")) {
+        // Ensure the loader is visible immediately on page refresh
         loader.style.display = "flex";
-        loader.style.opacity = "1";
-      }
-    });
 
-    // Show loader when a form is submitted
-    document.addEventListener("submit", function (e) {
-      loader.style.display = "flex"; // Show loader immediately
-      loader.style.opacity = "1"; // Ensure it's fully visible
-    });
+        // Remove loader when the page is fully loaded
+        window.addEventListener("load", function () {
+          gsap.to("#loading-screen", {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              loader.style.display = "none";
+            },
+          });
+        });
 
-   // Ensure the loader shows specifically for the login form
-    const loginForm = document.querySelector(".needs-validation"); // Use your form's class
-    if (loginForm) {
-      loginForm.addEventListener("submit", function () {
-        loader.style.display = "flex"; // Show loader immediately
-        loader.style.opacity = "1"; // Ensure it's fully visible
+        // Show loader when clicking on links or buttons that navigate
+        document.addEventListener("click", function (e) {
+          const target = e.target.closest("a, button");
+          if (target && target.getAttribute("href")) {
+            loader.style.display = "flex";
+            loader.style.opacity = "1";
+          }
+        });
+
+        // Show loader when a form is submitted
+        document.addEventListener("submit", function (e) {
+          loader.style.display = "flex"; // Show loader immediately
+          loader.style.opacity = "1"; // Ensure it's fully visible
+        });
+
+        // Ensure the loader shows specifically for the login form
+        const loginForm = document.querySelector(".needs-validation"); // Use your form's class
+        if (loginForm) {
+          loginForm.addEventListener("submit", function () {
+            loader.style.display = "flex"; // Show loader immediately
+            loader.style.opacity = "1"; // Ensure it's fully visible
+          });
+        }
       });
-    }
-    
-  });
-</script>
-
+    </script>
   </body>
 </html>

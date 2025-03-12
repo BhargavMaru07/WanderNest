@@ -756,6 +756,7 @@ footer {
 }
 
 /* create listing styling */
+.show-page-body,
 .contactUs-form-body,
 .create-new-listing-body,
 .edit-listing-body {
@@ -765,11 +766,44 @@ footer {
   background-size: cover;
 }
 
+
 .create-new-listing-body .row,
 .contactUs-form-body .row,
 .edit-listing-body .row {
   margin-bottom: 30px;
 }
+
+.show-page-body .container{
+  color: whitesmoke;
+}
+
+.show-card {
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* backdrop-filter: blur(10px);  */
+}
+
+.card-details{
+  color: black;
+}
+
+.show-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.starability-slot label {
+  color: #ffcc00;
+  cursor: pointer;
+}
+
+.starability-result {
+  color: #ffcc00;
+  font-size: 1.2rem;
+}
+
+
 
 .gsap-form {
   min-height: 100vh;
@@ -1100,7 +1134,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60vh; /* Full viewport height */
+  height: 60vh; 
   width: 100%;
 }
 
@@ -1123,12 +1157,12 @@ footer {
 .get-all-btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #00aaff; /* Light Blue */
+  background-color: #00aaff;
   color: white;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
-  border: 2px solid #0088cc; /* Slightly darker blue border */
+  border: 2px solid #0088cc; 
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
