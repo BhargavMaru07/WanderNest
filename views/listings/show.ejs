@@ -2,19 +2,19 @@
 <body class="show-page-body container-fluid p-0">
   <div class="container py-5">
     <!-- Listing Information -->
-    <h1 class="mb-4 text-center information-heading">Listing Details</h1>
-    <div class="card show-card shadow-lg border-0 rounded-4 p-4">
+    <h1 class="mb-4 text-center information-heading individual-list-heading">Listing Details</h1>
+    <div class="card show-card shadow-lg border-0 rounded-4 p-4 individual-list-card ">
       <div class="row g-4">
         <!-- Image Section -->
         <div class="col-md-6">
           <img
             src="<%= individualListings.image.url %>"
-            class="card-img-top show-img rounded-3 shadow-sm"
+            class="card-img-top show-img rounded-3 shadow-sm individual-list-img"
             alt="Listing Image"
           />
         </div>
         <!-- Details Section -->
-        <div class="col-md-6 card-details">
+        <div class="col-md-6 individual-list-card-details">
           <div class="card-body">
             <h2 class="fw-bold"><%= individualListings.title %></h2>
             <p>
@@ -40,7 +40,7 @@
 
     <!-- Edit & Delete Buttons -->
     <% if(currUser && currUser._id.equals(individualListings.owner._id)){ %>
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4 owner-buttons">
       <a
         href="/listings/edit/<%= individualListings._id %>"
         class="btn btn-primary mx-2 px-4"
@@ -66,13 +66,13 @@
       ></div>
     </div>
 
-    <hr class="mt-5 text-light" />
+    <hr class="mt-5 animated-hr" />
 
     <!-- Leave a Review Section -->
     <% if(currUser){ %>
     <div class="mt-5">
-      <h2 class="text-center mb-4">Leave a Review</h2>
-      <div class="card p-4 border-0 rounded-4 shadow-lg bg-dark text-light">
+      <h2 class="text-center mb-4 review-heading">Leave a Review</h2>
+      <div class="card p-4 border-0 rounded-4 shadow-lg bg-dark text-light review-card">
         <form
           action="/listings/<%= individualListings._id %>/review"
           method="post"
@@ -116,7 +116,7 @@
     </div>
     <% } %>
 
-    <hr class="mt-5 text-light" />
+    <hr class="mt-5 animated-hr2" />
 
     <!-- Display Reviews -->
     <% if(individualListings.reviews.length > 0){ %>

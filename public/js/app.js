@@ -377,29 +377,132 @@ rows.slice(2).forEach((row) => {
 
 
 
+gsap.from(".individual-list-heading",{
+  y:-80,
+  opacity:0,
+  duration:0.6,
+  delay:0.3
+});
 
-// //perticular card
+gsap.from(".individual-list-card",{
+  y:-100,
+  opacity:0,
+  duration:0.6,
+  delay:0.5
+});
 
-// gsap.from(".information-heading", {
-//   opacity: 0,
-//   x: -300,
-//   duration: 1,
-//   delay: 0.3,
-// });
+gsap.from(".individual-list-card-details",{
+  y:-50,
+  opacity:0,
+  duration:0.6,
+  delay:0.7
+});
+gsap.from(".individual-list-img", {
+  opacity: 0,
+  scale: 0.6,
+  duration: 1.2,
+  ease: "power2.out",
+});
 
-// //new  & edit listings page
+ gsap.from(".owner-buttons", {
+   opacity: 0,
+   y: 50,
+   duration: 1,
+   ease: "power2.out",
+   scrollTrigger: {
+     trigger: ".owner-buttons",
+     start: "top 80%",
+     end: "top 70%",
+     scrub: true,
+     toggleActions: "play reverse play reverse",
+   },
+ });
 
-// gsap.from(".new-listings-heading,.edit-listings-heading", {
-//   opacity: 0,
-//   x: -300,
-//   duration: 1,
-//   delay: 0.3,
-// });
+  gsap.from("#map", {
+    opacity: 0,
+    y: 100,
+    duration: 1.5,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#map",
+      start: "top 85%", 
+      end: "top 50%", 
+      scrub: true, 
+      toggleActions: "play reverse play reverse", 
+    },
+  });
 
-// gsap.from(".title,.description,.image,.price-country,.location,.btn", {
-//   opacity: 0,
-//   y: -100,
-//   duration: 0.4,
-//   delay: 0.3,
-//   stagger: 0.2,
-// });
+
+     gsap.fromTo(
+       ".animated-hr",
+       { scaleX: 0, opacity: 0 }, // Start state
+       {
+         scaleX: 1,
+         opacity: 1,
+         duration: 1.5,
+         ease: "power2.out",
+         scrollTrigger: {
+           trigger: ".animated-hr",
+           start: "top 90%",
+           end: "top 60%",
+           scrub: true,
+           toggleActions: "play reverse play reverse",
+         },
+       }
+     );
+
+
+     gsap.fromTo(
+       ".animated-hr2",
+       { scaleX: 0, opacity: 0 }, // Start state
+       {
+         scaleX: 1,
+         opacity: 1,
+         duration: 1.5,
+         ease: "power2.out",
+         scrollTrigger: {
+           trigger: ".animated-hr",
+           start: "top 90%",
+           end: "top 60%",
+           scrub: true,
+           toggleActions: "play reverse play reverse",
+         },
+       }
+     );
+
+
+      gsap.fromTo(
+        ".review-heading",
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".review-heading",
+            start: "top 85%",
+            end: "top 50%",
+            scrub: true,
+            toggleActions: "play reverse play reverse",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".review-card",
+        { opacity: 0, y: 70 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".review-card",
+            start: "top 85%",
+            end: "top 50%",
+            scrub: true,
+            toggleActions: "play reverse play reverse",
+          },
+        }
+      );

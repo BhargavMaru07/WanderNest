@@ -782,9 +782,29 @@ footer {
   /* backdrop-filter: blur(10px);  */
 }
 
-.card-details{
+.individual-list-card-details{
   color: black;
 }
+
+.animated-hr,.animated-hr2 {
+  border: none;
+  height: 5px; 
+  background: linear-gradient(to right, #ff416c, #ff4b2b); 
+  width: 100%;
+  transform-origin: center;
+}
+
+.review-heading {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.review-card {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+
 
 .show-img {
   width: 100%;
@@ -847,34 +867,34 @@ footer {
 
 .gsap-form input::placeholder,
 .gsap-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7); /* Soft white */
+  color: rgba(255, 255, 255, 0.7); 
 }
 
-/* When Input is Focused (Clicked or Typing) */
+
 .gsap-form input:focus,
 .gsap-form textarea:focus {
-  background: rgba(60, 60, 60, 0.9); /* Lightens slightly */
-  border: 1px solid rgba(0, 255, 255, 0.7); /* Stronger glow */
-  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5); /* Brighter effect */
+  background: rgba(60, 60, 60, 0.9); 
+  border: 1px solid rgba(0, 255, 255, 0.7); 
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5); 
 }
 
-/* Remove hover effect from the file input */
+
 .gsap-form input[type="file"] {
-  background: rgba(50, 50, 50, 0.9); /* Dark gray background */
-  color: rgba(255, 255, 255, 0.8); /* Softer white */
+  background: rgba(50, 50, 50, 0.9);
+  color: rgba(255, 255, 255, 0.8); 
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
 }
 
-/* Prevent background change on hover */
+
 .gsap-form input[type="file"]:hover,
 .gsap-form input[type="file"]:focus {
   background: rgba(50, 50, 50, 0.9) !important;
 }
 
-/* Customize "Choose File" button */
+
 .gsap-form input[type="file"]::-webkit-file-upload-button {
   background: rgba(0, 255, 255, 0.2); /* Theme-matching cyan */
   color: white;
@@ -884,7 +904,6 @@ footer {
   cursor: pointer;
 }
 
-/* Remove hover effect from "Choose File" button */
 .gsap-form input[type="file"]::-webkit-file-upload-button:hover {
   background: rgba(0, 255, 255, 0.2) !important; /* Keep the same background */
 }
