@@ -95,6 +95,8 @@ app.get("/contactUs",(req,res)=>{
   res.render("Contact")
 });
 
+
+
 app.post("/contactUs",(req,res)=>{
   let data = req.body; 
    req.flash(

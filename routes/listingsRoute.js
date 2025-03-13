@@ -50,5 +50,13 @@ router.put(
 
 //search
 router.get("/indivisual/search", wrapAsync(listingController.searchListings));
+router.get(
+  "/feature/order/asc",
+  wrapAsync(listingController.sortInAsc)
+);
+router.get(
+  "/feature/order/desc",
+  wrapAsync(listingController.sortInDesc)
+);
 
 module.exports = router;

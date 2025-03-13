@@ -30,6 +30,26 @@ module.exports.searchListings = async (req, res) => {
   res.render("listings/index.ejs", { allListings:searchResults, page: "allListingPage" });
 };
 
+
+module.exports.sortInAsc = async (req,res) => {
+  const results = await Listing.find({})
+
+  const sortedInAsc = results.slice().sort((a, b) => a.price - b.price);
+    res.render("listings/index.ejs", {
+      allListings: sortedInAsc,
+      page: "allListingPage",
+    });
+};  
+module.exports.sortInDesc = async (req,res) => {
+  const results = await Listing.find({});
+
+  const sortedInDesc = results.slice().sort((a, b) => b.price - a.price);
+  res.render("listings/index.ejs", {
+    allListings: sortedInDesc,
+    page: "allListingPage",
+  });
+};
+
 module.exports.showIndividualListing = async (req, res) => {
   let { id } = req.params;
   let individualListings = await Listing.findById(id)

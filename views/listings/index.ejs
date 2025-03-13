@@ -1,17 +1,45 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
   <div class="all-listing-page">
-    <form
-      action="/listings/indivisual/search"
-      method="GET"
-      class="search-container"
-    >
+    <!-- <div class="search-container">
+      <form action="/listings/indivisual/search" method="GET">
+        <div class="search-wrapper">
+          <input
+            type="text"
+            id="searchInput"
+            name="query"
+            placeholder="Search  Title, Location, Country..."
+            required
+          />
+          <button type="submit" id="searchBtn">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </form>
+      <div class="d-flex gap-2">
+        <form action="/asc-ordering">
+          <button class="btn btn-outline-primary">
+            Ascending <i class="fa-solid fa-angle-up"></i>
+          </button>
+        </form>
+        <form action="/desc-ordering">
+          <button class="btn btn-outline-primary">
+            Descending <i class="fa-solid fa-angle-down"></i>
+          </button>
+        </form>
+      </div>
+    </div> -->
+
+    <div class="search-container">
+  <div class="search-content">
+    <!-- Search Form -->
+    <form action="/listings/indivisual/search" method="GET" class="search-form">
       <div class="search-wrapper">
         <input
           type="text"
           id="searchInput"
           name="query"
-          placeholder="Search  Title, Location, Country..."
+          placeholder="Search Title, Location, Country..."
           required
         />
         <button type="submit" id="searchBtn">
@@ -19,16 +47,22 @@
         </button>
       </div>
     </form>
-    <form action="/asc-ordering">
-      <button class="outline">
-        ASC
-      </button>
-    </form>
-    <form action="/asc-ordering">
-      <button class="outline">
-        Des
-      </button>
-    </form>
+    
+    <!-- Sorting Buttons -->
+    <div class="sorting-buttons">
+      <form action="/listings/feature/order/asc">
+        <button class="btn btn-outline-primary">
+          ASC <i class="fa-solid fa-angle-up"></i>
+        </button>
+      </form>
+      <form action="/listings/feature/order/desc">
+        <button class="btn btn-outline-primary">
+          DESC <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 
     <%if(allListings.length > 0){ %>
     <h2 class="mt-3 mb-3 all-listings-heading">All Listings</h2>
@@ -69,3 +103,6 @@
     <%}%>
   </div>
 </body>
+<script>
+  
+</script>
