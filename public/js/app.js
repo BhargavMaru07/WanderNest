@@ -461,7 +461,7 @@ gsap.from(".individual-list-img", {
          duration: 1.5,
          ease: "power2.out",
          scrollTrigger: {
-           trigger: ".animated-hr",
+           trigger: ".animated-hr2",
            start: "top 90%",
            end: "top 60%",
            scrub: true,
@@ -506,3 +506,61 @@ gsap.from(".individual-list-img", {
           },
         }
       );
+
+
+      gsap.from(".all-reviews-heading", {
+        y: 70,
+        opacity: 0,
+        duration: 0.7,
+        delay: 0.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".all-reviews-heading",
+          start: "top 85%",
+          end: "top 70%",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+
+      
+  let reviewCards = gsap.utils.toArray(".review-card");
+
+  gsap.set(reviewCards, { opacity: 0, y: 100 });
+
+  reviewCards.forEach((card, index) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      delay: index * 0.2, 
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        end: "top 75%",
+        toggleActions: "play none none reset",
+      },
+    });
+  });
+
+
+  // Responsive adjustments for smaller screens
+  gsap.matchMedia().add("(max-width: 768px)", () => {
+    reviewCards.forEach((card, index) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: index * 0.3, 
+        scrollTrigger: {
+          trigger: card,
+          start: "top 95%",
+          end: "top 85%",
+          toggleActions: "play none none reset",
+        },
+      });
+    });
+  });

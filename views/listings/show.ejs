@@ -121,15 +121,15 @@
     <!-- Display Reviews -->
     <% if(individualListings.reviews.length > 0){ %>
     <div class="container mt-4">
-      <h2 class="text-center mb-4">All Reviews</h2>
+      <h2 class="text-center mb-4 all-reviews-heading">All Reviews</h2>
       <div class="row">
         <% individualListings.reviews.forEach(review => { %>
-        <div class="col-md-6 col-12 mb-4">
+        <div class="col-md-6 col-12 mb-4 review-card">
           <div
             class="card p-3 border-0 rounded-4 shadow-lg"
             style="background-color: #2c2c2c"
           >
-            <div class="card-body text-light">
+            <div class="card-body text-light ">
               <h5 class="fw-bold">@ <%= review.author.username %></h5>
               <p class="mb-2">
                 <strong>Comment:</strong> <%= review.comment %>
