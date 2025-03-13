@@ -26,13 +26,19 @@ module.exports.searchListings = async (req, res) => {
     ],
   });
 
+  // Store search results in session
+  req.session.filteredListings = searchResults;
+
   // Render the same listings page but with filtered results
-  res.render("listings/index.ejs", { allListings:searchResults, page: "allListingPage" });
+  res.render("listings/index.ejs", {
+    allListings: searchResults,
+    page: "allListingPage",
+  });
 };
 
 
 module.exports.sortInAsc = async (req,res) => {
-  const results = await Listing.find({})
+  const results = req.session.filteredListings || (await Listing.find({}));
 
   const sortedInAsc = results.slice().sort((a, b) => a.price - b.price);
     res.render("listings/index.ejs", {
@@ -41,7 +47,7 @@ module.exports.sortInAsc = async (req,res) => {
     });
 };  
 module.exports.sortInDesc = async (req,res) => {
-  const results = await Listing.find({});
+  const results = req.session.filteredListings || (await Listing.find({}));
 
   const sortedInDesc = results.slice().sort((a, b) => b.price - a.price);
   res.render("listings/index.ejs", {
