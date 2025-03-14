@@ -1261,3 +1261,42 @@ footer {
 .hidden {
   display: none;
 }
+
+/* wishlist */
+
+.btn-outline-custom {
+  color: white !important;
+  border-color: white !important;
+}
+
+.btn-outline-custom:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.btn-bookListing-outline-custom {
+  color: black !important;
+  border-color: black !important;
+}
+
+.btn-bookListing-outline-custom:hover {
+  color: white !important;
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.fa-heart-circle-check {
+  color: red !important;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.fa-heart {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 27px !important;
+  color: white;
+  z-index: 10000;
+  cursor: grab;
+}

@@ -60,6 +60,11 @@
           DESC <i class="fa-solid fa-angle-down"></i>
         </button>
       </form>
+      <form action="/wishlist">
+        <button class="btn btn-outline-custom">
+        <i class="fa-solid fa-heart-circle-check"></i> Wishlist
+        </button>
+      </form>
     </div>
   </div>
 </div>
@@ -69,7 +74,8 @@
     <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
       <% for(let listing of allListings){ %>
       <a href="/listings/<%= listing.id %>" class="listing-link">
-        <div class="card listing-card h-100">
+        <div class="card listing-card h-100 relative">
+          <i class="fa-regular fa-heart"></i>
           <div class="card-img-wrapper">
             <img
               src="<%= listing.image.url %>"
@@ -104,5 +110,6 @@
   </div>
 </body>
 <script>
-  
+ let btn =  document.querySelector(".fa-heart")
+ btn.addEventListener("")
 </script>

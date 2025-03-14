@@ -15,7 +15,7 @@
         </div>
         <!-- Details Section -->
         <div class="col-md-6 individual-list-card-details">
-          <div class="card-body">
+          <div class="card-body mb-2">
             <h2 class="fw-bold"><%= individualListings.title %></h2>
             <p>
               <b>Owner:</b>
@@ -33,6 +33,11 @@
               <b>Location:</b> <%= individualListings.location %>, <%=
               individualListings.country %>
             </p>
+            <form action="/book-listing">
+              <button class="btn btn-bookListing-outline-custom">
+                Book Listing
+              </button>
+            </form>
           </div>
         </div>
       </div>
