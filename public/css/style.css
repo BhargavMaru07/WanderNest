@@ -1306,3 +1306,7 @@ footer {
 .fa-heart.active {
   color: red;
 } 
+
+.min-vh-100 {
+  min-height: 100vh;
+}

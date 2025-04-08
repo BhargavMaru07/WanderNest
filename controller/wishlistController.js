@@ -21,5 +21,5 @@ module.exports.getWishlist = async (req, res) => {
     "listing"
   );
   const allListings = wishlistItems.map((item) => item.listing);
-  res.render("wishlist/index", { allListings });
+  res.render("wishlist/index", { allListings, page: "allListingPage" });
 };
