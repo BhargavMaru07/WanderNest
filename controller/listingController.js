@@ -1,10 +1,19 @@
 const Listing = require("../models/listing");
+const wishlist = require("../models/wishlist");
 const geocodeAddress = require("../utils/geoLocation");
 
 module.exports.allListings = async (req, res) => {
   let allListings = await Listing.find({});
+
+  let wishlistIds = [];
+
+  if (req.user) {
+    const wishlists = await wishlist.find({ user: req.user._id });
+    wishlistIds = wishlists.map((item) => item.listing.toString());
+  }
+
    res.locals.page = "listings";
-  res.render("listings/index.ejs", { allListings, page: "allListingPage" });
+  res.render("listings/index.ejs", { allListings, wishlistIds , page: "allListingPage" });
 };
 
 module.exports.renderNewListingForm = (req, res) => {

@@ -14,6 +14,7 @@ const ExpressError = require("./utils/ExpressError");
 const listingsRoute = require("./routes/listingsRoute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
 const userRoute = require("./routes/userRoute.js");
+const wishlistRoute = require("./routes/wishlistRoute.js")
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
@@ -70,6 +71,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodoverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.engine("ejs", ejsMate);
+app.use(express.json()); 
+
 
 mongoose
   .connect(process.env.MONGO_ATLAS_KEY)
@@ -83,6 +86,8 @@ app.use("/listings", listingsRoute);
 app.use("/listings/:id/review", reviewRoute);
 //For User routes
 app.use("/",userRoute)
+//For Wishlist routes
+app.use("/wishlist", wishlistRoute);
 
 //Root route
 app.get("/", (req, res) => {
@@ -90,12 +95,12 @@ app.get("/", (req, res) => {
   res.render("Home")
 });
 
+
+
 //For Contact Us
 app.get("/contactUs",(req,res)=>{
   res.render("Contact")
 });
-
-
 
 app.post("/contactUs",(req,res)=>{
   let data = req.body; 

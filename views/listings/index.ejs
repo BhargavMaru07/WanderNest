@@ -31,43 +31,47 @@
     </div> -->
 
     <div class="search-container">
-  <div class="search-content">
-    <!-- Search Form -->
-    <form action="/listings/indivisual/search" method="GET" class="search-form">
-      <div class="search-wrapper">
-        <input
-          type="text"
-          id="searchInput"
-          name="query"
-          placeholder="Search Title, Location, Country..."
-          required
-        />
-        <button type="submit" id="searchBtn">
-          <i class="fas fa-search"></i> Search
-        </button>
+      <div class="search-content">
+        <!-- Search Form -->
+        <form
+          action="/listings/indivisual/search"
+          method="GET"
+          class="search-form"
+        >
+          <div class="search-wrapper">
+            <input
+              type="text"
+              id="searchInput"
+              name="query"
+              placeholder="Search Title, Location, Country..."
+              required
+            />
+            <button type="submit" id="searchBtn">
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
+        </form>
+
+        <!-- Sorting Buttons -->
+        <div class="sorting-buttons">
+          <form action="/listings/feature/order/asc">
+            <button class="btn btn-outline-primary">
+              ASC <i class="fa-solid fa-angle-up"></i>
+            </button>
+          </form>
+          <form action="/listings/feature/order/desc">
+            <button class="btn btn-outline-primary">
+              DESC <i class="fa-solid fa-angle-down"></i>
+            </button>
+          </form>
+          <form action="/wishlist/">
+            <button class="btn btn-outline-custom">
+              <i class="fa-solid fa-heart-circle-check"></i> Wishlist
+            </button>
+          </form>
+        </div>
       </div>
-    </form>
-    
-    <!-- Sorting Buttons -->
-    <div class="sorting-buttons">
-      <form action="/listings/feature/order/asc">
-        <button class="btn btn-outline-primary">
-          ASC <i class="fa-solid fa-angle-up"></i>
-        </button>
-      </form>
-      <form action="/listings/feature/order/desc">
-        <button class="btn btn-outline-primary">
-          DESC <i class="fa-solid fa-angle-down"></i>
-        </button>
-      </form>
-      <form action="/wishlist">
-        <button class="btn btn-outline-custom">
-        <i class="fa-solid fa-heart-circle-check"></i> Wishlist
-        </button>
-      </form>
     </div>
-  </div>
-</div>
 
     <%if(allListings.length > 0){ %>
     <h2 class="mt-3 mb-3 all-listings-heading">All Listings</h2>
@@ -75,7 +79,11 @@
       <% for(let listing of allListings){ %>
       <a href="/listings/<%= listing.id %>" class="listing-link">
         <div class="card listing-card h-100 relative">
-          <i class="fa-regular fa-heart"></i>
+          <i
+            class="fa-heart <%= wishlistIds.includes(listing._id.toString()) ? 'fa-solid active' : 'fa-regular' %>"
+            data-id="<%= listing._id %>"
+          >
+          </i>
           <div class="card-img-wrapper">
             <img
               src="<%= listing.image.url %>"
@@ -110,6 +118,34 @@
   </div>
 </body>
 <script>
- let btn =  document.querySelector(".fa-heart")
- btn.addEventListener("")
+  document.querySelectorAll(".fa-heart").forEach((heart) => {
+    heart.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+
+      heart.classList.toggle("fa-regular");
+      heart.classList.toggle("fa-solid");
+      heart.classList.toggle("active");
+
+      const listingId = heart.getAttribute("data-id");
+
+     const res =  await fetch("/wishlist/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ listingId }),
+      });
+
+      const data = await res.json()
+
+       if (data.action === "added") {
+        this.classList.add("fa-solid", "active");
+        this.classList.remove("fa-regular");
+      } else {
+        this.classList.remove("fa-solid", "active");
+        this.classList.add("fa-regular");
+      }
+    });
+  });
 </script>

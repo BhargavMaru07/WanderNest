@@ -1299,4 +1299,10 @@ footer {
   color: white;
   z-index: 10000;
   cursor: grab;
+  transition: color 0.3s ease;
 }
+
+
+.fa-heart.active {
+  color: red;
+} 
