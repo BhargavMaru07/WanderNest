@@ -1310,3 +1310,20 @@ footer {
 .min-vh-100 {
   min-height: 100vh;
 }
+
+
+.modal-content {
+  background-color: white;
+  color: #212529; 
+}
+
+.modal-header h1, 
+.modal-body label, 
+.modal-body input, 
+.modal-body {
+  color: #212529;
+}
+
+.modal-title{
+  color: #0a0a0a;
+}

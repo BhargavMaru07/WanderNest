@@ -14,6 +14,7 @@ const ExpressError = require("./utils/ExpressError");
 const listingsRoute = require("./routes/listingsRoute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
 const userRoute = require("./routes/userRoute.js");
+const bookingRoutes = require("./routes/bookingRoute.js")
 const wishlistRoute = require("./routes/wishlistRoute.js")
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -88,6 +89,8 @@ app.use("/listings/:id/review", reviewRoute);
 app.use("/",userRoute)
 //For Wishlist routes
 app.use("/wishlist", wishlistRoute);
+//For booking route
+app.use("/bookings", bookingRoutes);
 
 //Root route
 app.get("/", (req, res) => {
