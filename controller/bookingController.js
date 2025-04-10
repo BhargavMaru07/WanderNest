@@ -16,3 +16,11 @@ module.exports.createBooking = async (req, res) => {
   req.flash("success", "Your booking was successful!");
   res.redirect(`/listings/${listingId}`);
 };
+
+
+module.exports.showBookings = async (req, res) => {
+  const bookings = await booking.find({ user: req.user._id }).populate(
+    "listing"
+  );
+  res.render("booking/bookings", { bookings, page: "allListingPage" });
+};

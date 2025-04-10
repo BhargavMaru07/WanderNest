@@ -1,7 +1,7 @@
 const Listing = require("./models/listing");
 const Review = require("./models/review");
 const ExpressError = require("./utils/ExpressError");
-const { listingSchema } = require("./schema");
+const { listingSchema, bookingSchema } = require("./schema");
 const { reviewSchema } = require("./schema");
 
 const isLoggedIn = (req, res, next) => {
@@ -65,7 +65,6 @@ const isLoggedIn = (req, res, next) => {
 
  const validateReview = (req, res, next) => {
    let { error } = reviewSchema.validate(req.body);
-
    if (error) {
      let errMsg = error.details.map((e) => e.message).join(",");
      throw new ExpressError(400, errMsg);
@@ -74,6 +73,16 @@ const isLoggedIn = (req, res, next) => {
    }
  };
 
+ const  validateBooking = (req, res, next) => {
+  const { error } = bookingSchema.validate(req.body, { abortEarly: false });
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(", ");
+    throw new ExpressError(400,msg);
+  } else {
+    next();
+  }
+}
+
  module.exports = {
    isLoggedIn,
    saveRedirectUrl,
@@ -81,4 +90,5 @@ const isLoggedIn = (req, res, next) => {
    isReviewAuthor,
    validateListing,
    validateReview,
+   validateBooking,
  };
