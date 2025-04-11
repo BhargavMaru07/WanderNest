@@ -18,20 +18,21 @@ const reviewSchema = Joi.object({
   }).required(),
 });
 
+
 const bookingSchema = Joi.object({
   booking: Joi.object({
+    listingId: Joi.string().required(),
     checkIn: Joi.date()
       .iso()
       .required()
       .custom((value, helpers) => {
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // remove time
+        today.setHours(0, 0, 0, 0);
         if (value < today) {
           return helpers.message("Check-in date cannot be in the past.");
         }
         return value;
       }),
-
     checkOut: Joi.date()
       .iso()
       .required()
@@ -42,13 +43,11 @@ const bookingSchema = Joi.object({
         }
         return value;
       }),
-
     guests: Joi.number().required().min(1).max(10).messages({
       "number.max": "Guest limit is 10.",
       "number.min": "At least 1 guest is required.",
     }),
   }).required(),
 });
-
 
 module.exports = { listingSchema, reviewSchema, bookingSchema };

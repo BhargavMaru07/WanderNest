@@ -121,7 +121,7 @@ app.all("*", (req, res, next) => {
 
 //error handling middleware..
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Server Not Working" } = err;
+  let { statusCode = 400, message = "Server Not Working" } = err;
   res.render("Error.ejs", { statusCode, message });
 });
 

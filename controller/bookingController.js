@@ -1,7 +1,7 @@
 const booking = require("../models/booking");
 
 module.exports.createBooking = async (req, res) => {
-  const { listingId, checkIn, checkOut, guests } = req.body;
+  const { listingId, checkIn, checkOut, guests } = req.body.booking;
 
   const newBooking = new booking({
     user: req.user._id,

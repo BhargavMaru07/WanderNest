@@ -24,7 +24,13 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css" integrity="sha512-8hM9a+2hrLBhOuB3uiy+QIXBsu6Qk+snsP1CboFQW6pdt/yYz0IcDp/+CGv5m39r9doGUc/zw6aBpyLF6XFgzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css"
+      integrity="sha512-8hM9a+2hrLBhOuB3uiy+QIXBsu6Qk+snsP1CboFQW6pdt/yYz0IcDp/+CGv5m39r9doGUc/zw6aBpyLF6XFgzg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="/css/rating.css" />
     <link
       rel="stylesheet"
@@ -72,24 +78,24 @@
       crossorigin=""
     ></script>
     <script src="/js/map.js"></script>
+
     <script>
-      setTimeout(() => {
-        let flashMessage = document.querySelector(".alert");
-        if (flashMessage) {
-          flashMessage.style.transition = "opacity 0.5s";
-          flashMessage.style.opacity = "0";
-          setTimeout(() => flashMessage.remove(), 500);
-        }
-      }, 2500);
+        setTimeout(() => {
+          let flashMessage = document.querySelector(".alert.alert-success");
+          if (flashMessage) {
+            flashMessage.style.transition = "opacity 0.5s";
+            flashMessage.style.opacity = "0";
+            setTimeout(() => flashMessage.remove(), 500);
+          }
+        }, 2500);
     </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const loader = document.getElementById("loading-screen");
 
-        // Ensure the loader is visible immediately on page refresh
         loader.style.display = "flex";
 
-        // Remove loader when the page is fully loaded
         window.addEventListener("load", function () {
           gsap.to("#loading-screen", {
             opacity: 0,
@@ -100,7 +106,6 @@
           });
         });
 
-        // Show loader when clicking on links or buttons that navigate
         document.addEventListener("click", function (e) {
           const target = e.target.closest("a, button");
           if (target && target.getAttribute("href")) {
@@ -109,18 +114,16 @@
           }
         });
 
-        // Show loader when a form is submitted
         document.addEventListener("submit", function (e) {
-          loader.style.display = "flex"; // Show loader immediately
-          loader.style.opacity = "1"; // Ensure it's fully visible
+          loader.style.display = "flex";
+          loader.style.opacity = "1";
         });
 
-        // Ensure the loader shows specifically for the login form
-        const loginForm = document.querySelector(".needs-validation"); // Use your form's class
+        const loginForm = document.querySelector(".needs-validation");
         if (loginForm) {
           loginForm.addEventListener("submit", function () {
-            loader.style.display = "flex"; // Show loader immediately
-            loader.style.opacity = "1"; // Ensure it's fully visible
+            loader.style.display = "flex";
+            loader.style.opacity = "1";
           });
         }
       });
