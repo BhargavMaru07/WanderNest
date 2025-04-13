@@ -1265,6 +1265,7 @@ footer {
 /* wishlist */
 
 .btn-outline-custom {
+  border: 2px solid white !important;
   color: white !important;
   border-color: white !important;
 }
@@ -1302,28 +1303,104 @@ footer {
   transition: color 0.3s ease;
 }
 
-
 .fa-heart.active {
   color: red;
-} 
+}
 
 .min-vh-100 {
   min-height: 100vh;
 }
 
-
 .modal-content {
   background-color: white;
-  color: #212529; 
+  color: #212529;
 }
 
-.modal-header h1, 
-.modal-body label, 
-.modal-body input, 
+.modal-header h1,
+.modal-body label,
+.modal-body input,
 .modal-body {
   color: #212529;
 }
 
-.modal-title{
+.modal-title {
   color: #0a0a0a;
+}
+
+.sorting-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sorting-buttons form {
+  flex: 1;
+}
+
+.sorting-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  gap: 5px;
+}
+
+.sorting-buttons button i {
+  font-size: 17px;
+}
+
+@media (max-width: 455px) {
+  .sorting-buttons {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .sorting-buttons button {
+    font-size: 12px;
+    padding: 8px 15px;
+    width: auto;
+  }
+
+  .sorting-buttons button i {
+    font-size: 12px;
+  }
+
+  .sorting-buttons form {
+    width: auto;
+  }
+}
+
+@media (max-width: 378px) {
+  .sorting-buttons {
+    flex-wrap: wrap;
+  }
+
+  .sorting-buttons form {
+    width: 100%;
+  }
+
+  .sorting-buttons form:first-child {
+    width: calc(50% - 5px);
+  }
+
+  .sorting-buttons form:nth-child(2) {
+    width: 100%;
+  }
+
+  .sorting-buttons button {
+    width: 100%;
+  }
+}
+
+/* ASC & DECS BUTTON */
+.custom-btn {
+  border: 2px solid rgba(0, 255, 255, 0.6) !important;
+  color: white !important;
+}
+
+.custom-btn:hover {
+  background-color: rgba(0, 255, 255, 0.8) !important;
+  border-color: rgba(0, 255, 255, 0.8) !important;
+  color: black !important;
 }
