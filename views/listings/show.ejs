@@ -105,6 +105,7 @@
                 id="rate-<%= i %>"
                 name="review[rating]"
                 value="<%= i %>"
+                checked
               />
               <label for="rate-<%= i %>" title="<%= i %> stars"
                 ><%= i %> stars</label
@@ -171,7 +172,9 @@
         <% }) %>
       </div>
     </div>
-    <% } %>
+    <% } else {%>
+     <div class="fs-3 fw-bold text-center">No Review</div>
+    <% }%>
   </div>
 
 

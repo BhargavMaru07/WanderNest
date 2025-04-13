@@ -134,7 +134,6 @@ module.exports.newListing = async (req, res) => {
   }
 
   let savedListing = await newListing.save();
-  console.log(savedListing);
   req.flash("success", "New Listing Created!!");
   res.redirect("/listings");
 };
@@ -186,7 +185,7 @@ module.exports.updateListing = async (req, res, next) => {
       listing.image = { url: req.file.path, filename: req.file.filename };
     }
 
-    await listing.save(); // Ensure all changes are saved
+    await listing.save(); 
 
     req.flash("success", "Listing Updated!!");
     res.redirect(`/listings/${id}`);

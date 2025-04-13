@@ -1,6 +1,7 @@
 const { Schema, model, set, default: mongoose } = require("mongoose");
 const Review = require("./review");
-const { number, required } = require("joi");
+
+mongoose.set("runValidators",true);
 
 const listingSchema = new Schema({
   title: {
@@ -38,7 +39,6 @@ const listingSchema = new Schema({
       filename: "default-image",
     },
   },
-
   price: {
     type: Number,
     required: true,
