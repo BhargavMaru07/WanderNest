@@ -24,3 +24,28 @@ module.exports.showBookings = async (req, res) => {
   );
   res.render("booking/bookings", { bookings, page: "allListingPage" });
 };
+
+
+module.exports.deleteBooking = async (req, res) => {
+  const { id } = req.params;
+
+  const existingBooking = await booking.findById(id);
+
+  if (!existingBooking) {
+    req.flash("error", "Booking not found.");
+    return res.redirect("/bookings");
+  }
+
+  const now = new Date();
+  const oneDayBeforeCheckIn = new Date(existingBooking.checkIn);
+  oneDayBeforeCheckIn.setDate(oneDayBeforeCheckIn.getDate() - 1);
+
+  if (now > oneDayBeforeCheckIn) {
+    req.flash("error", "You can only cancel at least 1 day before check-in.");
+    return res.redirect("/bookings");
+  }
+
+  await booking.findByIdAndDelete(id);
+  req.flash("success", "Booking canceled successfully.");
+  res.redirect("/bookings");
+};

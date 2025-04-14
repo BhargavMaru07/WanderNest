@@ -104,10 +104,31 @@ footer {
   text-decoration: none;
   transition: color 0.1s ease;
   cursor: pointer;
+}
 
-  &:hover {
-    color: #0077b5;
-  }
+a[aria-label="Facebook"]:hover {
+  background-color: #1877f2;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a[aria-label="LinkedIn"]:hover {
+  background-color: #0a66c2;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a[aria-label="Instagram"]:hover {
+  background-color: #e1306c;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a:hover i {
+  color: white;
 }
 
 .f-brand p {
@@ -1403,4 +1424,9 @@ footer {
   background-color: rgba(0, 255, 255, 0.8) !important;
   border-color: rgba(0, 255, 255, 0.8) !important;
   color: black !important;
+}
+
+
+.booking-card{
+  cursor: default !important;
 }

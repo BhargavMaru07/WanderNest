@@ -9,6 +9,9 @@ const getWishlistIds = async (user) => {
 };
 
 module.exports.allListings = async (req, res) => {
+
+    req.session.filteredListings = null;
+    
   let allListings = await Listing.find({});
 
   // let wishlistIds = [];
