@@ -1,5 +1,7 @@
 const { Schema, model, set, default: mongoose } = require("mongoose");
 const Review = require("./review");
+const wishlist = require("./wishlist");
+const booking = require("./booking");
 
 mongoose.set("runValidators",true);
 
@@ -70,8 +72,17 @@ const listingSchema = new Schema({
 //mongoose middleware ....write it before model creation
 
 listingSchema.post("findOneAndDelete", async (listing) => {
-  if (listing.reviews.length) {
-    await Review.deleteMany({ _id: { $in: listing.reviews } });
+  if (listing) {
+    // Delete associated reviews
+    if (listing.reviews.length) {
+      await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
+
+    // Delete associated wishlist entries
+    await wishlist.deleteMany({ listing: listing._id });
+
+    // Delete associated bookings
+    await booking.deleteMany({ listing: listing._id });
   }
 });
 
