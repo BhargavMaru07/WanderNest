@@ -50,12 +50,12 @@ body {
 
 /* Hover effect */
 .navbar-toggler:hover {
-  background-color: rgba(0, 255, 255, 0.5) !important;
+  background-color: rgba(0, 255, 255, 0.838) !important;
 }
 
 .fa-compass {
   /* color: #fe424d; */
-  color: rgba(0, 255, 255, 0.5);
+  color: rgba(0, 255, 255, 0.863);
   font-size: 2rem;
   transition: transform 0.5s ease-in-out;
   animation: spin 3s linear infinite;
@@ -95,7 +95,7 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-  color: rgba(0, 255, 255, 0.5) !important; 
+  color: rgba(0, 255, 255, 0.84) !important; 
 }
 
 
@@ -223,7 +223,7 @@ a:hover i {
 }
 
 .btn-outline-light:hover {
-  background-color: #fe424d !important ; /* Highlight color on button hover */
+  background-color: rgba(0, 255, 255, 0.5) !important ; 
   color: white !important;
 }
 
@@ -485,7 +485,7 @@ a:hover i {
 
 .category:hover i {
   transform: rotate(10deg) scale(1.1);
-  color: #ff0055;
+  color: rgba(0, 255, 255, 0.881);
 }
 
 /* Responsive Wrapping */
@@ -813,7 +813,7 @@ a:hover i {
 .animated-hr2 {
   border: none;
   height: 5px;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  background: linear-gradient(to right, rgba(0, 255, 255, 0.5), rgba(196, 214, 214, 0.5));
   width: 100%;
   transform-origin: center;
 }
@@ -1083,11 +1083,11 @@ footer {
 
 .add-btn,
 .edit-btn {
-  background-color: #fe424d !important;
+  background-color: rgba(0, 117, 242, 0.852) !important;
   border: none !important;
 
   &:hover {
-    background-color: #dd1b28 !important ;
+    background-color: rgba(3, 95, 194, 0.852)!important ;
   }
 }
 
@@ -1286,7 +1286,7 @@ footer {
   width: 60px;
   height: 60px;
   border: 6px solid rgba(255, 255, 255, 0.3);
-  border-top-color: rgba(0, 255, 255, 0.5);;
+  border-top-color: rgba(0, 255, 255, 0.87);;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
